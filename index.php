@@ -1,39 +1,9 @@
-<?php
-session_start(); // Start the session
-
-// Check if the user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.php"); // Redirect to the login page
-    exit;
-}
-// If the user is logged in, the rest of the page will be displayed
-
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "gufc";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Query to get data
-$sql = "SELECT Product_ID, Product_Name, date FROM product";
-$result = $conn->query($sql);
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>HOME</title>
-  <link rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="CSS/style2.css" />
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
   <style>
@@ -65,15 +35,15 @@ $result = $conn->query($sql);
   <div class="container">
     <nav>
       <ul>
-        <li><a href="index.php" class="logo">
-          <img src="Solane Logo.png" alt="">
+        <li><a href="#" class="logo">
+          <img src="images/Solane Logo.png" alt="">
           <span class="nav-item">GUFC Solane</span>
         </a></li>
-        <li><a href="#">
+        <li><a href="index.php">
           <i class="fas fa-home"></i>
           <span class="nav-item">Home</span>
         </a></li>
-        <li><a href="">
+        <li><a href="inventory.php">
           <i class="fas fa-user"></i>
           <span class="nav-item">INVENTORY</span>
         </a></li>
@@ -83,9 +53,6 @@ $result = $conn->query($sql);
         </a></li>
       </ul>
     </nav>
-
-    <section class="main">
-      
 
     <section class="main">
       <section class="main-course">
@@ -103,20 +70,21 @@ $result = $conn->query($sql);
             </tr>
           </thead>
           <tbody>
-            <?php
-            if ($result->num_rows > 0) {
-                // Output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row["Product_ID"] . "</td>";
-                    echo "<td>" . $row["Product_Name"] . "</td>";
-                    echo "<td>" . $row["date"] . "</td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='3'></td></tr>";
-            }
-            ?>
+            <tr>
+              <td>1</td>
+              <td>HTML</td>
+              <td>2024-08-01</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>CSS</td>
+              <td>2024-07-15</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>JavaScript</td>
+              <td>2024-06-30</td>
+            </tr>
           </tbody>
         </table>
       </section>
@@ -157,6 +125,3 @@ $result = $conn->query($sql);
   </script>
 </body>
 </html>
-
-
-
