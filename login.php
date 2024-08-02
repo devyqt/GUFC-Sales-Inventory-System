@@ -50,13 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solane Login</title>
-    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="login-container">
-        <img src="images/Background.png" alt="Background" class="background-img">
+        <img src="Background.png" alt="Background" class="background-img">
         <div class="login-box">
-            <img src="images/Solane Logo.png" alt="Solane Logo" class="logo">
+            <img src="Solane Logo.png" alt="Solane Logo" class="logo">
             <form id="loginForm" method="post" action="login.php">
                 <h2>Login</h2>
                 <div class="input-group">
