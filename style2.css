@@ -55,13 +55,12 @@ nav .fas{
   width: 70px;
   height: 40px;
   top: 14px;
-  font-size: 20px;
-  text-align: center;
+  font-size: 20px;  text-align: center;
 }
 .nav-item{
   position: relative;
   top: 12px;
-  margin-left: 10px;
+  margin-left: -10px;
 }
 a:hover{
   background: #eee;
@@ -70,6 +69,25 @@ a:hover{
   position: absolute;
   bottom: 0;
 }
+/* FOR INVENTORY BUTTON */
+.add-product-button {
+  background-color: #007bff; /* Blue color similar to the design */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  margin-top: -50px;
+  float: right;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
 
 /* Main Section */
 .main{
