@@ -65,7 +65,7 @@ $result = $conn->query($sql);
   <div class="container">
     <nav>
       <ul>
-        <li><a href="#" class="logo">
+        <li><a href="index.php" class="logo">
           <img src="Solane Logo.png" alt="">
           <span class="nav-item">GUFC Solane</span>
         </a></li>
