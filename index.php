@@ -7,6 +7,24 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 // If the user is logged in, the rest of the page will be displayed
+
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gufc";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to get data
+$sql = "SELECT Product_ID, Product_Name, date FROM product";
+$result = $conn->query($sql);
+
 ?>
 
 
@@ -69,6 +87,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <section class="main">
       
 
+    <section class="main">
       <section class="main-course">
         <h1>My Courses</h1>
         <div class="filter-container">
@@ -84,21 +103,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>HTML</td>
-              <td>2024-08-01</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>CSS</td>
-              <td>2024-07-15</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>JavaScript</td>
-              <td>2024-06-30</td>
-            </tr>
+            <?php
+            if ($result->num_rows > 0) {
+                // Output data of each row
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["Product_ID"] . "</td>";
+                    echo "<td>" . $row["Product_Name"] . "</td>";
+                    echo "<td>" . $row["date"] . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='3'></td></tr>";
+            }
+            ?>
           </tbody>
         </table>
       </section>
