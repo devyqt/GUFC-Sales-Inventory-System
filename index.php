@@ -48,7 +48,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <nav>
       <ul>
         <li><a href="#" class="logo">
-          <img src="images/Solane Logo.png" alt="">
+          <img src="Solane Logo.png" alt="">
           <span class="nav-item">GUFC Solane</span>
         </a></li>
         <li><a href="#">
