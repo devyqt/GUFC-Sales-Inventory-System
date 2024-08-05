@@ -59,8 +59,9 @@
         <br>
         <h1>DASHBOARD</h1>
         <div class="filter-container">
-          <input type="text" id="filterInput" placeholder="Search product...">
-          <button class="sort-button" onclick="sortTable()">Sort by Date</button> <button class="add-product-button" onclick="openModal()">View Sales</button>
+          <input type="text" id="filterInput" placeholder="Search product ID...">
+          <button class="sort-button" onclick="sortTable()">Sort by Date</button> 
+          <button class="add-product-button" onclick="openModal()">View Sales</button>
         </div>
         
         <table id="coursesTable">
@@ -68,25 +69,12 @@
             <tr>
               <th>Product ID</th>
               <th>Product Name</th>
+              <th>Product Quantity</th>
               <th>Date</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>012-432-325</td>
-              <td>PRODUCT</td>
-              <td>2024-08-01</td>
-            </tr>
-            <tr>
-              <td>132-532-342</td>
-              <td>PRODUCT</td>
-              <td>2024-07-15</td>
-            </tr>
-            <tr>
-              <td>352-322-342</td>
-              <td>PRODUCT</td>
-              <td>2024-06-30</td>
-            </tr>
+            <!-- Rows will be dynamically added here -->
           </tbody>
         </table>
       </section>
@@ -112,16 +100,17 @@
   </div>
 
   <script>
+    let sortDirection = 'asc'; // Initialize sort direction
+
     function openModal() {
-  document.getElementById('productModal').style.display = 'block';
-  document.body.style.overflow = 'hidden'; // Disable scrolling on the body
-}
+      document.getElementById('productModal').style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Disable scrolling on the body
+    }
 
-function closeModal() {
-  document.getElementById('productModal').style.display = 'none';
-  document.body.style.overflow = 'auto'; // Re-enable scrolling on the body
-}
-
+    function closeModal() {
+      document.getElementById('productModal').style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling on the body
+    }
 
     // Close modal if user clicks outside of it
     window.onclick = function(event) {
@@ -131,6 +120,42 @@ function closeModal() {
       }
     }
 
+    function fetchProducts() {
+      fetch('db_operations.php')
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector('#coursesTable tbody');
+          tbody.innerHTML = ''; // Clear existing rows
+          data.forEach(product => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${product.Product_ID}</td>
+              <td>${product.Product_Name}</td>
+              <td>${product.Product_Qty}</td>
+              <td>${product.date}</td>
+            `;
+            tbody.appendChild(row);
+          });
+        });
+    }
+
+    function addOrUpdateProduct() {
+      const form = document.getElementById('addProductForm');
+      const formData = new FormData(form);
+      
+      fetch('db_operations.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(message => {
+        alert(message);
+        form.reset(); // Clear the form fields
+        closeModal(); // Close the modal
+        fetchProducts(); // Refresh the table
+      });
+    }
+
     function filterTable() {
       const input = document.getElementById('filterInput').value.toLowerCase();
       const table = document.getElementById('coursesTable');
@@ -138,29 +163,32 @@ function closeModal() {
 
       for (let i = 0; i < rows.length; i++) {
         const cells = rows[i].getElementsByTagName('td');
-        let found = false;
-        for (let j = 1; j < cells.length; j++) { // Start from 1 to skip Product ID
-          if (cells[j].textContent.toLowerCase().includes(input)) {
-            found = true;
-            break;
-          }
-        }
-        rows[i].style.display = found ? '' : 'none';
+        const productIdCell = cells[0].textContent.toLowerCase(); // Product_ID is in the first column
+        rows[i].style.display = productIdCell.includes(input) ? '' : 'none';
       }
     }
 
     function sortTable() {
       const table = document.getElementById('coursesTable');
-      const rows = Array.from(table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
-      const sortedRows = rows.sort((a, b) => {
-        const dateA = new Date(a.getElementsByTagName('td')[2].textContent);
-        const dateB = new Date(b.getElementsByTagName('td')[2].textContent);
-        return dateA - dateB;
+      const tbody = table.getElementsByTagName('tbody')[0];
+      const rows = Array.from(tbody.getElementsByTagName('tr'));
+
+      rows.sort((a, b) => {
+        const dateA = new Date(a.getElementsByTagName('td')[3].textContent);
+        const dateB = new Date(b.getElementsByTagName('td')[3].textContent);
+
+        return sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
       });
-      sortedRows.forEach(row => table.getElementsByTagName('tbody')[0].appendChild(row));
+
+      sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+
+      rows.forEach(row => tbody.appendChild(row));
     }
 
     document.getElementById('filterInput').addEventListener('keyup', filterTable);
+
+    // Initial fetch
+    fetchProducts();
   </script>
 </body>
 </html>
