@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>HOME</title>
-  <link rel="stylesheet" href="CSS/style2.css" />
+  <link rel="stylesheet" href="CSS/indexstyle.css" />
   <link rel="stylesheet" href="CSS/modal.css">
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -57,10 +57,10 @@
     <section class="main">
       <section class="main-course">
         <br>
-        <h1>INVENTORY</h1>
+        <h1>DASHBOARD</h1>
         <div class="filter-container">
           <input type="text" id="filterInput" placeholder="Search for courses...">
-          <button class="sort-button" onclick="sortTable()">Sort by Date</button> <button class="add-product-button" onclick="openModal()">Add Product</button>
+          <button class="sort-button" onclick="sortTable()">Sort by Date</button> <button class="add-product-button" onclick="openModal()">View Sales</button>
         </div>
         
         <table id="coursesTable">
@@ -74,17 +74,17 @@
           <tbody>
             <tr>
               <td>012-432-325</td>
-              <td>HTML</td>
+              <td>PRODUCT</td>
               <td>2024-08-01</td>
             </tr>
             <tr>
-              <td>2</td>
               <td>132-532-342</td>
+              <td>PRODUCT</td>
               <td>2024-07-15</td>
             </tr>
             <tr>
               <td>352-322-342</td>
-              <td>JavaScript</td>
+              <td>PRODUCT</td>
               <td>2024-06-30</td>
             </tr>
           </tbody>
