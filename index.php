@@ -59,7 +59,7 @@
         <br>
         <h1>DASHBOARD</h1>
         <div class="filter-container">
-          <input type="text" id="filterInput" placeholder="Search for courses...">
+          <input type="text" id="filterInput" placeholder="Search product...">
           <button class="sort-button" onclick="sortTable()">Sort by Date</button> <button class="add-product-button" onclick="openModal()">View Sales</button>
         </div>
         
