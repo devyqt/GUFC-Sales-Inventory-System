@@ -36,6 +36,9 @@
     .delete-button {
       color: red;
     }
+    .select-all {
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -69,16 +72,18 @@
           <input type="text" id="filterInput" placeholder="Search product id...">
           <button class="sort-button" onclick="sortTable()">Sort by Date</button>
           <button class="add-product-button" onclick="openModal()">Add Product</button>
+          <button class="delete-button" onclick="deleteSelected()">Delete Selected</button> <!-- Added Delete Selected Button -->
         </div>
         
         <table id="coursesTable">
           <thead>
             <tr>
+              <th><input type="checkbox" id="selectAll" class="select-all" onclick="toggleSelectAll(this)"></th> <!-- Added Select All Checkbox -->
               <th>Product ID</th>
               <th>Product Name</th>
               <th>Product Quantity</th>
               <th>Date</th>
-              <th>Actions</th> <!-- Added Actions column -->
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -109,8 +114,8 @@
     </div>
   </div>
 
-      <!-- JavaScript -->
-<script>
+  <!-- JavaScript -->
+  <script>
     let sortDirection = 'asc'; // Initialize sort direction
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -125,27 +130,29 @@
     });
 
     function fetchProducts() {
-        fetch('db_operations.php')
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.querySelector('#coursesTable tbody');
-                tbody.innerHTML = ''; // Clear existing rows
-                data.forEach(product => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${product.Product_ID}</td>
-                        <td>${product.Product_Name}</td>
-                        <td>${product.Product_Qty}</td>
-                        <td>${product.date}</td>
-                        <td>
-                          <button class="edit-button" onclick="editProduct('${product.Product_ID}')">Edit</button>
-                          <button class="delete-button" onclick="deleteProduct('${product.Product_ID}')">Delete</button>
-                        </td>
-                    `;
-                    tbody.appendChild(row);
-                });
+    fetch('db_operations.php')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.querySelector('#coursesTable tbody');
+            tbody.innerHTML = ''; // Clear existing rows
+            data.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="checkbox" class="product-checkbox" data-id="${product.Product_ID}"></td>
+                    <td>${product.Product_ID}</td>
+                    <td>${product.Product_Name}</td>
+                    <td>${product.Product_Qty}</td>
+                    <td>${product.date}</td>
+                    <td>
+                        <button class="edit-button" onclick="editProduct('${product.Product_ID}')">Edit</button>
+                        <button class="delete-button" onclick="deleteProduct('${product.Product_ID}')">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
             });
-    }
+        });
+}
+
 
     function addOrUpdateProduct() {
         const form = document.getElementById('addProductForm');
@@ -200,7 +207,7 @@
 
         for (let i = 0; i < rows.length; i++) {
             const cells = rows[i].getElementsByTagName('td');
-            const productIdCell = cells[0].textContent.toLowerCase(); // Product_ID is in the first column
+            const productIdCell = cells[1].textContent.toLowerCase(); // Product_ID is in the second column
             if (productIdCell.includes(input)) {
                 rows[i].style.display = '';
             } else {
@@ -215,8 +222,8 @@
       const rows = Array.from(tbody.getElementsByTagName('tr'));
 
       rows.sort((a, b) => {
-        const dateA = new Date(a.getElementsByTagName('td')[3].textContent);
-        const dateB = new Date(b.getElementsByTagName('td')[3].textContent);
+        const dateA = new Date(a.getElementsByTagName('td')[4].textContent);
+        const dateB = new Date(b.getElementsByTagName('td')[4].textContent);
 
         return sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
       });
@@ -243,11 +250,37 @@
         }
     }
 
+    function deleteSelected() {
+        const checkboxes = document.querySelectorAll('.product-checkbox:checked');
+        const productIds = Array.from(checkboxes).map(cb => cb.getAttribute('data-id'));
+
+        if (productIds.length === 0) {
+            alert('No products selected for deletion.');
+            return;
+        }
+
+        if (confirm('Are you sure you want to delete the selected products?')) {
+            fetch('db_operations.php', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ Product_IDs: productIds })
+            })
+            .then(response => response.text())
+            .then(message => {
+                alert(message);
+                fetchProducts(); // Refresh the table
+            });
+        }
+    }
+
+    function toggleSelectAll(selectAllCheckbox) {
+        const checkboxes = document.querySelectorAll('.product-checkbox');
+        checkboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
+    }
+
     document.getElementById('filterInput').addEventListener('keyup', filterTable);
-</script>
-
-
-
-
+  </script>
 </body>
 </html>

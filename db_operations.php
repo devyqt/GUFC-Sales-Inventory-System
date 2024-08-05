@@ -32,36 +32,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productQty = $_POST['productQty'];
     $productDate = $_POST['productDate'];
 
-    $stmt = $conn->prepare("INSERT INTO test_table (Product_ID, Product_Name, Product_Qty, date) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssis", $productID, $productName, $productQty, $productDate);
-
-    if ($stmt->execute()) {
-        echo "New product added successfully";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-
+    // Check if the Product_ID already exists
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM test_table WHERE Product_ID=?");
+    $stmt->bind_param("s", $productID);
+    $stmt->execute();
+    $stmt->bind_result($count);
+    $stmt->fetch();
     $stmt->close();
-}
 
-// Handle DELETE request (Delete product)
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    $data = json_decode(file_get_contents('php://input'), true);
-    $productID = $data['Product_ID'] ?? '';
-
-    if ($productID) {
-        $stmt = $conn->prepare("DELETE FROM test_table WHERE Product_ID=?");
-        $stmt->bind_param("s", $productID); // Assuming Product_ID is a string
+    if ($count > 0) {
+        echo "Error: Product ID already exists.";
+    } else {
+        // Insert new product
+        $stmt = $conn->prepare("INSERT INTO test_table (Product_ID, Product_Name, Product_Qty, date) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssis", $productID, $productName, $productQty, $productDate);
 
         if ($stmt->execute()) {
-            echo "Product deleted successfully";
+            echo "New product added successfully";
         } else {
             echo "Error: " . $stmt->error;
         }
 
         $stmt->close();
+    }
+}
+
+// Handle DELETE request (Delete product or products)
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    if (isset($data['Product_ID']) && !empty($data['Product_ID'])) {
+        // Single deletion
+        $productID = $data['Product_ID'];
+
+        $stmt = $conn->prepare("DELETE FROM test_table WHERE Product_ID=?");
+        $stmt->bind_param("s", $productID);
+
+        if ($stmt->execute()) {
+            echo "Product deleted successfully.";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
+    } elseif (isset($data['Product_IDs']) && is_array($data['Product_IDs'])) {
+        // Multiple deletions
+        $productIds = $data['Product_IDs'];
+
+        // Create a placeholder string for the query
+        $placeholders = implode(',', array_fill(0, count($productIds), '?'));
+        $stmt = $conn->prepare("DELETE FROM test_table WHERE Product_ID IN ($placeholders)");
+
+        if ($stmt) {
+            // Bind parameters
+            $types = str_repeat('s', count($productIds)); // Assuming IDs are strings
+            $stmt->bind_param($types, ...$productIds);
+
+            if ($stmt->execute()) {
+                echo "Products deleted successfully.";
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+
+            $stmt->close();
+        } else {
+            echo "Error preparing statement: " . $conn->error;
+        }
     } else {
-        echo "Product ID is required for deletion.";
+        echo "Product_ID or Product_IDs are required for deletion.";
     }
 }
 
