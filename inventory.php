@@ -59,7 +59,7 @@
         <br>
         <h1>INVENTORY</h1>
         <div class="filter-container">
-          <input type="text" id="filterInput" placeholder="Search for courses...">
+          <input type="text" id="filterInput" placeholder="Search product...">
           <button class="sort-button" onclick="sortTable()">Sort by Date</button> <button class="add-product-button" onclick="openModal()">Add Product</button>
         </div>
         
@@ -106,7 +106,7 @@
         <input type="text" id="productName" name="productName" required><br><br>
         <label for="productDate">Date:</label>
         <input type="date" id="productDate" name="productDate" required><br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" 
       </form>
     </div>
   </div>
