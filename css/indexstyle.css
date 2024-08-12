@@ -83,115 +83,110 @@ a:hover {
   bottom: 0;
 }
 
-/* New Styles */
-.filter-add-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px;
-}
-.main-course {
-  margin-left:30px;
-}
 
-.filter-container {
-  display: flex;
-  gap: 10px;
-  
-}
-
-input[type="text"] {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.sort-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 750px;
-  
-}
-
-.sort-button:hover {
-  background-color: #0056b3;
-}
-
-.add-product-button {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-.add-product-button:hover {
-  background-color: #218838;
-}
-
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
+/* Dashboard styles */
+.dashboard {
+  width: calc(100% - 280px);
+  margin-left: 280px;
   padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  background: #f1f5f8;
+  min-height: 100vh;
 }
 
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+  
 }
 
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  cursor: pointer;
-}
-
-input[type="submit"] {
-  width: 100%;
-  background-color: #502bd4;
-  color: white;
-  padding: 10px;
+.total-products {
+  background: #6EB5ff;
   border-radius: 5px;
-  cursor: pointer;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color:#000000
+}
+  .out-of-stock {
+    background: #ff7477;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color:#000000
+}
+  .sales-today {
+    background: #BFFC66;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color:#000000
+  }
+    .total-sales {
+      background: #FFF5BA;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-color:#000000
+  
 }
 
-input[type="submit"]:hover {
-  background-color: #5e001c;
+.metric span {
+  display: block;
+  color: #000000;
+  font-size: 16px;
+  margin-bottom: 10px;
+  
 }
+
+.metric p {
+  font-size: 24px;
+  color: #333;
+}
+
+.sales-overview {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sales-overview h3 {
+  margin-bottom: 20px;
+}
+
+/* Adjust navigation styles if necessary */
+nav ul li a {
+  color: #333; /* darker text for better readability */
+}
+
+/* Maintain existing global styles */
+
+/* Adjust navigation styles if necessary */
+nav ul li a {
+  color: #333; /* darker text for better readability */
+}
+
+/* Maintain existing global styles */
+
+.container {
+  display: flex;
+  flex-wrap: nowrap; /* Ensures the sidebar and the dashboard are side by side */
+}
+
+nav {
+  width: 280px; /* Fixed width for the sidebar */
+  flex-shrink: 0; /* Ensures that sidebar does not shrink */
+}
+
+.dashboard {
+  flex-grow: 1; /* Makes dashboard take up the remaining space */
+  margin-left: 0; /* Adjust if necessary depending on layout */
+  padding: 20px;
+  width: auto; /* Automatically adjusts width */
+}
+
