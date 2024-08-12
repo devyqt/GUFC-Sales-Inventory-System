@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>HOME</title>
-  <link rel="stylesheet" href="CSS/indexstyle.css" />
+  <link rel="stylesheet" href="CSS/style2.css"/>
   <link rel="stylesheet" href="CSS/modal.css">
   <!-- FOR THE TABLE -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -51,7 +51,7 @@
         </a></li>
         <li><a href="index.php">
           <i class="fas fa-home"></i>
-          <span class="nav-item">Home</span>
+          <span class="nav-item">DASHBOARD</span>
         </a></li>
         <li><a href="inventory.php">
           <i class="fas fa-user"></i>
@@ -71,7 +71,7 @@
         <div class="filter-container">
           <input type="text" id="filterInput" placeholder="Search product id...">
           <button class="sort-button" onclick="sortTable()">Sort by Date</button>
-          <button class="add-product-button" onclick="openModal()">Add Product</button>
+          <button class="addproduct-button" onclick="openModal()">Add Product</button>
           <button class="delete-button" onclick="deleteSelected()">Delete Selected</button> <!-- Added Delete Selected Button -->
         </div>
         
@@ -81,7 +81,6 @@
               <th><input type="checkbox" id="selectAll" class="select-all" onclick="toggleSelectAll(this)"></th> <!-- Added Select All Checkbox -->
               <th>Product ID</th>
               <th>Product Name</th>
-              <th>Product Quantity</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -98,14 +97,14 @@
   <div id="productModal" class="modal">
     <div class="modal-content">
       <span class="close-button" onclick="closeModal()">&times;</span>
-      <h3>Add/Edit Product</h3>
+      <h3>Add Product</h3>
       <br>
       <form id="addProductForm">
-        <label for="productID">Product ID: &nbsp; </label> 
+        <label for="productID">Product ID: &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
         <input type="text" id="productID" name="productID" required><br><br>
         <label for="productName">Product Name: &nbsp; </label>
         <input type="text" id="productName" name="productName" required><br><br>
-        <label for="productQty">Quantity: &nbsp; </label>
+        <label for="productQty">Quantity: &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <input type="text" id="productQty" name="productQty" required><br><br>
         <label for="productDate">Date:</label>
         <input type="date" id="productDate" name="productDate" required><br><br>
