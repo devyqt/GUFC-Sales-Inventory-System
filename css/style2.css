@@ -69,6 +69,137 @@ a:hover{
   position: absolute;
   bottom: 0;
 }
+
+/* New Styles */
+.filter-add-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+.main-course {
+  margin-left:30px;
+}
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  
+}
+
+input[type="text"] {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.sort-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 750px;
+  
+}
+
+.sort-button:hover {
+  background-color: #0056b3;
+}
+
+.addproduct-button {
+  padding: 10px 20px;
+  background-color: #148a2d;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 650px;
+  color: white;
+ 
+}
+
+.addproduct-button:hover {
+  background-color: #3a29d4;
+}
+
+.delete-button {
+  padding: 10px 20px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  margin-left: 700px;
+  cursor: pointer;
+  color: black;
+}
+.delete-button:hover {
+background-color: rgb(189, 170, 170);
+}
+  
+  
+
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  cursor: pointer;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: #502bd4;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #16b151;
+}
+
+
 /* FOR INVENTORY BUTTON */
 .add-product-button {
   background-color: #007bff; /* Blue color similar to the design */
