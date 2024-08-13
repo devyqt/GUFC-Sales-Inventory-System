@@ -239,7 +239,7 @@
             .then(response => response.text())
             .then(message => {
                 alert(message);
-                fetchProducts(); // Refresh the table
+                fetchProducts();
             });
         }
     }
