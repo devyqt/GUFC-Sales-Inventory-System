@@ -29,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productID = $_POST['productID'];
     $productName = $_POST['productName'];
-    $productQty = $_POST['productQty'];
     $productDate = $_POST['productDate'];
 
     // Check if the Product_ID already exists
@@ -44,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error: Product ID already exists.";
     } else {
         // Insert new product
-        $stmt = $conn->prepare("INSERT INTO test_table (Product_ID, Product_Name, Product_Qty, date) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssis", $productID, $productName, $productQty, $productDate);
+        $stmt = $conn->prepare("INSERT INTO test_table (Product_ID, Product_Name, date) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $productID, $productName, $productDate);
 
         if ($stmt->execute()) {
             echo "New product added successfully";

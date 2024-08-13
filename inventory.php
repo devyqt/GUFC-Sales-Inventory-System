@@ -104,8 +104,6 @@
         <input type="text" id="productID" name="productID" required><br><br>
         <label for="productName">Product Name: &nbsp; </label>
         <input type="text" id="productName" name="productName" required><br><br>
-        <label for="productQty">Quantity: &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <input type="text" id="productQty" name="productQty" required><br><br>
         <label for="productDate">Date:</label>
         <input type="date" id="productDate" name="productDate" required><br><br>
         <input type="submit" value="Submit">
@@ -140,7 +138,6 @@
                     <td><input type="checkbox" class="product-checkbox" data-id="${product.Product_ID}"></td>
                     <td>${product.Product_ID}</td>
                     <td>${product.Product_Name}</td>
-                    <td>${product.Product_Qty}</td>
                     <td>${product.date}</td>
                     <td>
                         <button class="edit-button" onclick="editProduct('${product.Product_ID}')">Edit</button>
@@ -176,13 +173,11 @@
             // Populate form fields if editing
             document.getElementById('productID').value = product.Product_ID;
             document.getElementById('productName').value = product.Product_Name;
-            document.getElementById('productQty').value = product.Product_Qty;
             document.getElementById('productDate').value = product.date;
         } else {
             // Clear form fields if adding
             document.getElementById('productID').value = '';
             document.getElementById('productName').value = '';
-            document.getElementById('productQty').value = '';
             document.getElementById('productDate').value = '';
         }
         modal.style.display = 'block';
