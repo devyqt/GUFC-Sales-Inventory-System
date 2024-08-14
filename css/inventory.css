@@ -82,3 +82,23 @@
 .add-product-button:hover {
   background-color: #3a29d4;
 }
+
+.product-table-container {
+  margin-top: 20px;
+}
+
+#productTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#productTable th, #productTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#productTable th {
+  background-color: #f4f4f4;
+}

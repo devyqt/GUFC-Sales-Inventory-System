@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Filter table rows
-    document.getElementById('filterInput').addEventListener('keyup', filterTable);
+    // Handle delete button clicks
+    document.getElementById('deleteSelected').addEventListener('click', deleteSelectedProducts);
 
     // Close modal when clicking outside of it
     window.onclick = function(event) {
@@ -42,7 +42,20 @@ function fetchProducts() {
     fetch('db_operations.php')
         .then(response => response.json())
         .then(data => {
-            // Assuming you have some method to display products if not using a table
+            const tableBody = document.querySelector('#productTable tbody');
+            tableBody.innerHTML = ''; // Clear the existing table rows
+
+            data.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="checkbox" class="product-checkbox" value="${product.Product_ID}"></td>
+                    <td>${product.Product_ID}</td>
+                    <td>${product.Product_Name}</td>
+                    <td>${product.date}</td>
+                    <td><button onclick="deleteProduct('${product.Product_ID}')">Delete</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
         });
 }
 
@@ -59,8 +72,44 @@ function addOrUpdateProduct() {
         alert(message);
         form.reset(); // Clear the form fields
         closeModal(); // Close the modal
-        fetchProducts(); // Refresh the product display
+        fetchProducts(); // Refresh the product table
     });
+}
+
+function deleteProduct(productId) {
+    if (confirm('Are you sure you want to delete this product?')) {
+        fetch('db_operations.php', {
+            method: 'DELETE',
+            body: JSON.stringify({ Product_ID: productId })
+        })
+        .then(response => response.text())
+        .then(message => {
+            alert(message);
+            fetchProducts(); // Refresh the product table
+        });
+    }
+}
+
+function deleteSelectedProducts() {
+    const checkboxes = document.querySelectorAll('.product-checkbox:checked');
+    const productIds = Array.from(checkboxes).map(cb => cb.value);
+
+    if (productIds.length === 0) {
+        alert('No products selected for deletion.');
+        return;
+    }
+
+    if (confirm('Are you sure you want to delete the selected products?')) {
+        fetch('db_operations.php', {
+            method: 'DELETE',
+            body: JSON.stringify({ Product_IDs: productIds })
+        })
+        .then(response => response.text())
+        .then(message => {
+            alert(message);
+            fetchProducts(); // Refresh the product table
+        });
+    }
 }
 
 function openModal() {
@@ -70,20 +119,3 @@ function openModal() {
 function closeModal() {
     document.getElementById('productModal').style.display = 'none';
 }
-
-function filterTable() {
-    const input = document.getElementById('filterInput').value.toLowerCase();
-    const table = document.getElementById('coursesTable'); // Adjust if necessary
-    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-
-    for (let i = 0; i < rows.length; i++) {
-        const cells = rows[i].getElementsByTagName('td');
-        const productIdCell = cells[1].textContent.toLowerCase(); // Adjust index if necessary
-        if (productIdCell.includes(input)) {
-            rows[i].style.display = '';
-        } else {
-            rows[i].style.display = 'none';
-        }
-    }
-}
-

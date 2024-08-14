@@ -27,22 +27,22 @@
         <div id="cylinders" class="tab-pane active">
           <div class="product-container">
             <div class="box">
-              <img src="images/11kg.jpg" alt="Product 1" class="product-img" style="width: 150px; height: 150px; object-fit: cover;">
+              <img src="images/11kg.jpg" alt="Product 1" class="product-img" style="width: 250px; height: 250px; object-fit: cover;">
               <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
               <p><strong>Description:</strong> High quality cylinder.</p>
             </div>
             <div class="box">
-              <img src="images/14kg.jpg" alt="Product 2" class="product-img" style="width: 150px; height: 150px; object-fit: cover;">
+              <img src="images/14kg.jpg" alt="Product 2" class="product-img" style="width: 250px; height: 250px; object-fit: cover;">
               <p><strong>Product Name:</strong> 1.4kg Solane Sakto</p>
               <p><strong>Description:</strong> Durable and reliable.</p>
             </div>
             <div class="box">
-              <img src="images/22kg.jpg" alt="Product 3" class="product-img" style="width: 150px; height: 150px; object-fit: cover;">
+              <img src="images/22kg.jpg" alt="Product 3" class="product-img" style="width: 250px; height: 250px; object-fit: cover;">
               <p><strong>Product Name:</strong> 22kg POL Cylinder</p>
               <p><strong>Description:</strong> High quality cylinder.</p>
             </div>
             <div class="box">
-              <img src="images/50kg.jpg" alt="Product 4" class="product-img" style="width: 150px; height: 150px; object-fit: cover;">
+              <img src="images/50kg.jpg" alt="Product 4" class="product-img" style="width: 250px; height: 250px; object-fit: cover;">
               <p><strong>Product Name:</strong> 50kg Cylinder</p>
               <p><strong>Description:</strong> Durable and reliable.</p>
             </div>
@@ -70,6 +70,25 @@
         </div>
       </div>
     </div>
+
+    <!-- Product Table -->
+    <div class="product-table">
+        <button id="deleteSelected" class="btn-delete">Delete Selected</button>
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Product rows will be populated here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
   </section>
 </div>
 
@@ -85,17 +104,23 @@
       </div>
       <div class="form-group">
         <label for="productName">Product Name:</label>
-        <input type="text" id="productName" name="productName" class="form-control" required>
+        <select id="productName" name="productName" class="form-control" required>
+          <option value="">Select Cylinder</option>
+          <option value="11kg Auto-Shutoff Cylinder">11kg Auto-Shutoff Cylinder</option>
+          <option value="14kg Solane Sakto">14kg Solane Sakto</option>
+          <option value="22kg POL Cylinder">22kg POL Cylinder</option>
+          <option value="50kg Cylinder">50kg Cylinder</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="productDate">Date:</label>
         <input type="date" id="productDate" name="productDate" class="form-control" required>
       </div>
-      <input type="submit" value="Submit" class="btn-submit">
+      <button type="submit" class="btn-submit">Submit</button>
     </form>
   </div>
 </div>
 
-<script src="js/inventory.js"></script>
+<script src="JS/inventory.js"></script>
 </body>
 </html>
