@@ -1,0 +1,124 @@
+/* style.css */
+
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
+
+/* Reset and Global Styles */
+
+
+body {
+  background: #dfe9f5;
+}
+
+/* Container Styles */
+.container {
+  display: flex;
+}
+
+/* Navigation Styles */
+nav {
+  position: relative;
+  height: 100vh;
+  width: 280px;
+  background: #fff;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+nav .logo {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+nav .logo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+nav .logo span {
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+nav a {
+  color: rgb(85, 83, 83);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  width: 100%;
+}
+
+nav a:hover {
+  background: #eee;
+}
+
+nav .fas {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.nav-item {
+  margin-left: 10px;
+}
+
+nav .logout {
+  position: absolute;
+  bottom: 0;
+}
+
+/* Form Button Styles */
+input[type="submit"] {
+  width: 100%;
+  background-color: #502bd4;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #16b151;
+}
+
+/* Box Styles */
+.box {
+  width: 23%; /* Adjust based on the number of items in a row */
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(235, 233, 233);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.box img {
+  width: 150px; /* Consistent size for images */
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px; /* Optional: border-radius for images */
+}
+
+.box p {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.box button {
+  background: #000;
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 10px;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+
+.box button:hover {
+  background: rgba(0, 0, 0, 0.842);
+}
