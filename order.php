@@ -49,9 +49,11 @@
             <thead>
                 <tr>
                     <th>Select</th>
-                    <th>Order ID</th>
-                    <th>Order Date</th>
+                    <th>Order ID</th>                   
                     <th>Customer</th>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                    <th>Order Date</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -79,9 +81,15 @@
         <input type="text" id="customerName" name="customerName" class="form-control" required>
       </div>
       <div class="form-group">
+        <label for="itemName">Product:</label>
+        <select id="itemName" name="itemName" class="form-control" required>
+          <!-- Options will be dynamically loaded here -->
+        </select>
+      </div>
+      <div class="form-group">
         <label for="orderDate">Order Date:</label>
         <input type="date" id="orderDate" name="orderDate" class="form-control" required>
-      </div>
+      </div>   
       <button type="submit" class="btn-submit">Submit</button>
     </form>
   </div>

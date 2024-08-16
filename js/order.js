@@ -1,9 +1,8 @@
-// JavaScript for managing the Orders page
-
 // Function to open the Add Order modal
 function openOrderModal() {
     const modal = document.getElementById("orderModal");
     modal.style.display = "block";
+    loadProductOptions(); // Load product options when modal opens
 }
 
 // Function to close the Add Order modal
@@ -12,37 +11,79 @@ function closeOrderModal() {
     modal.style.display = "none";
 }
 
-// Function to handle tab switching
-document.querySelectorAll('.tab-link').forEach(tab => {
-    tab.addEventListener('click', function(e) {
-        e.preventDefault();
-        // Remove active class from all tabs
-        document.querySelectorAll('.tab-link').forEach(tab => {
-            tab.classList.remove('active');
+// Function to load product options into the dropdown
+function loadProductOptions() {
+    const itemSelect = document.getElementById('itemName');
+
+    fetch('db_operations.php') // Adjust to the correct path if necessary
+        .then(response => response.json())
+        .then(data => {
+            itemSelect.innerHTML = ''; // Clear existing options
+
+            if (data.length > 0) {
+                data.forEach(product => {
+                    const option = document.createElement('option');
+                    option.value = JSON.stringify({
+                        name: product.Product_Name,
+                        id: product.Product_ID,
+                        price: product.Product_Price // Include price in the option value
+                    });
+                    option.textContent = `${product.Product_Name}`;
+                    itemSelect.appendChild(option);
+                });
+            } else {
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = 'No Products';
+                itemSelect.appendChild(option);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching product data:', error);
         });
-        // Add active class to the clicked tab
-        this.classList.add('active');
+}
 
-        // Hide all tab panes
-        document.querySelectorAll('.tab-pane').forEach(pane => {
-            pane.classList.remove('active');
-        });
-
-        // Show the selected tab pane
-        const targetPane = document.querySelector(this.getAttribute('href'));
-        targetPane.classList.add('active');
-    });
-});
-
-// Function to add a new order to the table
+// Function to handle form submission
 document.getElementById('addOrderForm').addEventListener('submit', function(e) {
     e.preventDefault();
     // Get form data
     const orderID = document.getElementById('orderID').value;
     const customerName = document.getElementById('customerName').value;
     const orderDate = document.getElementById('orderDate').value;
+    const itemDetails = JSON.parse(document.getElementById('itemName').value); // Parse item details from JSON
 
-    // Create a new row in the table
+    // Prepare data for sending to the server
+    const formData = new FormData();
+    formData.append('orderID', orderID);
+    formData.append('customerName', customerName);
+    formData.append('orderDate', orderDate);
+    formData.append('productID', itemDetails.id);
+
+    // Send data to the server
+    fetch('process_order.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            // Add the new row to the table
+            addOrderRow(orderID, orderDate, customerName, itemDetails.name, itemDetails.price);
+
+            // Reset form and close modal
+            document.getElementById('addOrderForm').reset();
+            closeOrderModal();
+        } else {
+            alert('Failed to add order. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+// Function to add a row to the order table
+function addOrderRow(orderID, orderDate, customerName, itemName, itemPrice) {
     const table = document.getElementById('orderTable').getElementsByTagName('tbody')[0];
     const newRow = table.insertRow();
 
@@ -51,39 +92,34 @@ document.getElementById('addOrderForm').addEventListener('submit', function(e) {
     const orderIDCell = newRow.insertCell(1);
     const orderDateCell = newRow.insertCell(2);
     const customerCell = newRow.insertCell(3);
-    const statusCell = newRow.insertCell(4);
-    const actionCell = newRow.insertCell(5);
+    const itemNameCell = newRow.insertCell(4);
+    const itemPriceCell = newRow.insertCell(5);
+    const statusCell = newRow.insertCell(6);
+    const actionCell = newRow.insertCell(7);
 
     // Set cell content
     selectCell.innerHTML = '<input type="checkbox" class="select-order">';
     orderIDCell.textContent = orderID;
     orderDateCell.textContent = orderDate;
     customerCell.textContent = customerName;
+    itemNameCell.textContent = itemName; // Display item name
+    itemPriceCell.textContent = `$${itemPrice.toFixed(2)}`; // Display item price
     statusCell.textContent = 'Pending';
-    actionCell.innerHTML = '<button class="btn-edit" onclick="editOrder(this)">Edit</button> <button class="btn-delete" onclick="deleteOrder(this)">Delete</button>';
+    actionCell.innerHTML = '<button class="btn-delete" onclick="deleteOrder(this)">Delete</button>';
+}
 
-    // Reset form and close modal
-    document.getElementById('addOrderForm').reset();
-    closeOrderModal();
-});
-
-// Function to edit an existing order
-function editOrder(button) {
-    const row = button.parentNode.parentNode;
-    const orderID = row.cells[1].textContent;
-    const orderDate = row.cells[2].textContent;
-    const customerName = row.cells[3].textContent;
-
-    // Populate the modal with existing data
-    document.getElementById('orderID').value = orderID;
-    document.getElementById('customerName').value = customerName;
-    document.getElementById('orderDate').value = orderDate;
-
-    // Remove the row after editing is complete
-    row.parentNode.removeChild(row);
-
-    // Open the modal for editing
-    openOrderModal();
+// Function to fetch and display orders
+function loadOrders() {
+    fetch('get_orders.php') // Fetch existing orders
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(order => {
+                addOrderRow(order.Order_ID, order.Order_Date, order.Customer_Name, order.Product_Name, order.Product_Price);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching orders:', error);
+        });
 }
 
 // Function to delete an order from the table
@@ -103,7 +139,10 @@ document.getElementById('deleteSelectedOrders').addEventListener('click', functi
 // Function to close modal if clicked outside of it
 window.onclick = function(event) {
     const modal = document.getElementById("orderModal");
-    if (event.target == modal) {
+    if (event.target === modal) {
         closeOrderModal();
     }
 }
+
+// Load orders when the page loads
+window.onload = loadOrders;
