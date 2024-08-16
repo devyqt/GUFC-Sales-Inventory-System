@@ -8,8 +8,9 @@
   text-decoration: none;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-}
+  position: fix;
 
+}
 /* Dashboard styles */
 .dashboard {
   width: calc(100% - 280px);
@@ -70,12 +71,71 @@
 }
 
 .sales-overview {
+  height: 800px;
+  width: 1000px;
   background: #ffffff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
 }
 
 .sales-overview h3 {
   margin-bottom: 20px;
+}
+
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed; /* This fixes the sidebar in place */
+    top: 0; /* Aligns it to the top of the viewport */
+    left: 0; /* Aligns it to the left of the viewport */
+    width: 280px; /* Set the width of the sidebar */
+    height: 100vh; /* Make it full height of the viewport */
+    background-color: #001670; /* Background color */
+    padding: 20px;
+    z-index: 1000; /* Ensure it stays on top of other elements */
+    overflow-y: auto; /* Allows scrolling if content is taller than viewport */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    color: #fff; /* Text color */
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757; /* Hover effect */
+}
+
+.sidebar .logo img {
+    max-width: 100%; /* Ensures the logo is responsive */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.sidebar .gufc-text {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Adjust the main content to account for the sidebar */
+.dashboard {
+    margin-left: 280px; /* Matches the sidebar width */
+    padding: 20px;
+    background: #f1f5f8;
+    min-height: 100vh;
 }
