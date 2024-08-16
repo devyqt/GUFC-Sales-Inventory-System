@@ -51,6 +51,7 @@ function fetchProducts() {
                     <td><input type="checkbox" class="product-checkbox" value="${product.Product_ID}"></td>
                     <td>${product.Product_ID}</td>
                     <td>${product.Product_Name}</td>
+                    <td>${product.Product_Price}</td>
                     <td>${product.date}</td>
                     <td><button onclick="deleteProduct('${product.Product_ID}')">Delete</button></td>
                 `;

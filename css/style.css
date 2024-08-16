@@ -186,3 +186,205 @@ input[type="submit"]:hover {
   background: rgba(0, 0, 0, 0.842);
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Tab Container Styles */
+.tab-container {
+  width: 100%; /* Full width of the container */
+  box-sizing: border-box; /* Includes padding and border in the element's total width */
+  
+}
+
+/* Tabs Container */
+.tabs {
+  display: flex;
+  justify-content: center; /* Center align the tabs horizontally */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #f1f1f1;
+  width: 100%; /* Full width */
+}
+
+/* Individual Tab Links */
+.tabs li {
+  flex: 1; /* Allow tabs to stretch equally */
+  margin: 0;
+}
+
+.tab-link {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  background: #ddd;
+  border-radius: 5px;
+  text-align: center; /* Center text inside each tab */
+  transition: background-color 0.3s, font-weight 0.3s;
+}
+
+.tab-link.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 1px solid #fff;
+}
+
+.tab-link:hover {
+  background: #bbb;
+}
+
+
+/* Tab Content Styles */
+.tab-content {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  width: 100%; /* Full width */
+}
+
+/* Ensure active tab pane is visible */
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Product Container Styles */
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between the product boxes */
+  margin-top: 20px;
+  justify-content: flex-start; /* Align the product boxes to the left */
+  padding: 0 20px; /* Add padding to keep the content away from the edges */
+  margin-left: 280px; /* Offset to align with the sidebar */
+  box-sizing: border-box; /* Ensure padding is included in width calculations */
+}
+
+/* Individual Product Box */
+.box {
+  background: #fff; /* Background color for the product box */
+  border: 1px solid #ddd; /* Subtle border around each product */
+  border-radius: 5px; /* Rounded corners */
+  padding: 15px; /* Inner padding for content */
+  text-align: center; /* Center align the content */
+  width: calc(25% - 20px); /* Adjust the width to fit 4 items in a row */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.2s; /* Smooth transform effect on hover */
+}
+
+/* Hover effect on product box */
+.box:hover {
+  transform: translateY(-5px); /* Slightly lift the box on hover */
+}
+
+/* Product Image Styling */
+.product-img {
+  width: 100%; /* Make sure the image fills the width of the box */
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* Add Product Button */
+.add-product-button {
+  padding: 10px 20px;
+  background-color: #148a2d;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto; /* Center the button horizontally */
+}
+
+.add-product-button:hover {
+  background-color: #3a29d4;
+}
+
+/* Product Table Container */
+.product-table-container {
+  margin-top: 20px;
+  padding: 0 20px; /* Add padding to align with the product container */
+  margin-left: 280px; /* Offset to align with the sidebar */
+  box-sizing: border-box;
+}
+
+#productTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#productTable th, #productTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#productTable th {
+  background-color: #f4f4f4;
+}
+
+/* Sidebar styling */
+.sidebar {
+  position: fixed; /* Fix the sidebar in place */
+  top: 0; /* Align it to the top of the viewport */
+  left: 0; /* Align it to the left of the viewport */
+  width: 280px; /* Set the width of the sidebar */
+  height: 100vh; /* Full height of the viewport */
+  background-color: #001670; /* Background color */
+  padding: 20px;
+  z-index: 1000; /* Ensure it stays on top of other elements */
+  overflow-y: auto; /* Allows scrolling if content is taller than viewport */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+  color: #fff; /* Text color */
+  font-size: 18px;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757; /* Hover effect */
+}
+
+.sidebar .logo img {
+  max-width: 100%; /* Ensures the logo is responsive */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.sidebar .gufc-text {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Adjust the main content to account for the sidebar */
+.dashboard {
+  margin-left: 280px; /* Matches the sidebar width */
+  padding: 20px;
+  background: #f1f5f8;
+  min-height: 100vh;
+  transition: margin-left 0.3s; /* Smooth transition if width changes */
+}
+

@@ -4,11 +4,35 @@ html, body {
   padding: 0;
 }
 
+/* Sidebar styling */
+.sidebar {
+  position: fixed; /* Fix the sidebar in place */
+  top: 0; /* Align it to the top of the viewport */
+  left: 0; /* Align it to the left of the viewport */
+  width: 280px; /* Set the width of the sidebar */
+  height: 100vh; /* Full height of the viewport */
+  background-color: #001670; /* Background color */
+  padding: 20px;
+  z-index: 1000; /* Ensure it stays on top of other elements */
+  overflow-y: auto; /* Allows scrolling if content is taller than viewport */
+}
+
+/* Adjust the main content to account for the sidebar */
+.dashboard, .main, .product-table-container {
+  margin-left: 280px; /* Matches the sidebar width */
+  padding: 20px;
+  background: #f1f5f8;
+  min-height: 100vh;
+  transition: margin-left 0.3s; /* Smooth transition if width changes */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
 /* Tab Container Styles */
 .tab-container {
   width: 100%; /* Full width of the container */
   box-sizing: border-box; /* Includes padding and border in the element's total width */
-  
+  padding: 0 20px; /* Adjust padding to fit within main content area */
+  margin-left: 0; /* Remove left margin to align with main content */
 }
 
 /* Tabs Container */
@@ -49,7 +73,6 @@ html, body {
   background: #bbb;
 }
 
-
 /* Tab Content Styles */
 .tab-content {
   padding: 20px;
@@ -76,7 +99,7 @@ html, body {
   margin-top: 20px;
   justify-content: flex-start; /* Align the product boxes to the left */
   padding: 0 20px; /* Add padding to keep the content away from the edges */
-  margin-left: 280px; /* Offset to align with the sidebar */
+  margin-left: 0; /* Remove left margin to align with main content */
   box-sizing: border-box; /* Ensure padding is included in width calculations */
 }
 
@@ -124,7 +147,6 @@ html, body {
 .product-table-container {
   margin-top: 20px;
   padding: 0 20px; /* Add padding to align with the product container */
-  margin-left: 280px; /* Offset to align with the sidebar */
   box-sizing: border-box;
 }
 
@@ -144,58 +166,26 @@ html, body {
   background-color: #f4f4f4;
 }
 
-/* Sidebar styling */
-.sidebar {
-  position: fixed; /* Fix the sidebar in place */
-  top: 0; /* Align it to the top of the viewport */
-  left: 0; /* Align it to the left of the viewport */
-  width: 280px; /* Set the width of the sidebar */
-  height: 100vh; /* Full height of the viewport */
-  background-color: #001670; /* Background color */
-  padding: 20px;
-  z-index: 1000; /* Ensure it stays on top of other elements */
-  overflow-y: auto; /* Allows scrolling if content is taller than viewport */
+/* Responsive Design - Adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Full width on smaller screens */
+    height: auto; /* Adjust height to fit content */
+    position: relative; /* Change positioning to relative */
+  }
+
+  .dashboard, .main, .product-table-container {
+    margin-left: 0; /* Remove left margin to fill the screen width */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .box {
+    width: calc(50% - 20px); /* Adjust width to fit 2 items in a row on smaller screens */
+  }
 }
 
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  margin-bottom: 20px;
-}
-
-.sidebar ul li a {
-  color: #fff; /* Text color */
-  font-size: 18px;
-  text-decoration: none;
-  display: block;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.sidebar ul li a:hover {
-  background-color: #575757; /* Hover effect */
-}
-
-.sidebar .logo img {
-  max-width: 100%; /* Ensures the logo is responsive */
-  height: auto;
-  margin-bottom: 20px;
-}
-
-.sidebar .gufc-text {
-  color: #fff;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-/* Adjust the main content to account for the sidebar */
-.dashboard {
-  margin-left: 280px; /* Matches the sidebar width */
-  padding: 20px;
-  background: #f1f5f8;
-  min-height: 100vh;
-  transition: margin-left 0.3s; /* Smooth transition if width changes */
+@media screen and (max-width: 480px) {
+  .box {
+    width: calc(100% - 20px); /* Adjust width to fit 1 item per row on very small screens */
+  }
 }

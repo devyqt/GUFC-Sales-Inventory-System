@@ -4,15 +4,17 @@
   <meta charset="UTF-8">
   <title>INVENTORY</title>
   <link rel="stylesheet" href="CSS/style.css">
-  <link rel="stylesheet" href="CSS/inventory.css">
   <link rel="stylesheet" href="CSS/modal.css">
+  <link rel="stylesheet" href="CSS/inventory.css">
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
 </head>
 <body>
-<div class="container">
-  <?php include 'navbar.html'; ?>
 
+<?php include 'navbar.html'; ?>
+
+<div class="container">
   <section class="main">
     <div class="tab-container">
       <!-- Category Tabs -->
@@ -80,6 +82,7 @@
                     <th>Select</th>
                     <th>Product ID</th>
                     <th>Product Name</th>
+                    <th>Price</th>
                     <th>Date</th>
                     <th>Action</th>
                 </tr>
@@ -111,6 +114,10 @@
           <option value="22kg POL Cylinder">22kg POL Cylinder</option>
           <option value="50kg Cylinder">50kg Cylinder</option>
         </select>
+      </div>
+      <div class="form-group">
+        <label for="productPrice">Product Price</label> 
+        <input type="text" id="productPrice" name="productPrice" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="productDate">Date:</label>

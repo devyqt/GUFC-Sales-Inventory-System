@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 
 // Fetch data
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $sql = "SELECT * FROM test_table";
+    $sql = "SELECT * FROM product_table";
     $result = $conn->query($sql);
 
     $data = [];
@@ -27,10 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productID = $_POST['productID'];
     $productName = $_POST['productName'];
+    $productPrice = $_POST['productPrice']; // Added product price
     $productDate = $_POST['productDate'];
 
     // Check if the Product_ID already exists
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM test_table WHERE Product_ID=?");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM product_table WHERE Product_ID=?");
     $stmt->bind_param("s", $productID);
     $stmt->execute();
     $stmt->bind_result($count);
@@ -41,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error: Product ID already exists.";
     } else {
         // Insert new product
-        $stmt = $conn->prepare("INSERT INTO test_table (Product_ID, Product_Name, date) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $productID, $productName, $productDate);
+        $stmt = $conn->prepare("INSERT INTO product_table (Product_ID, Product_Name, Product_Price, date) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $productID, $productName, $productPrice, $productDate);
 
         if ($stmt->execute()) {
             echo "New product added successfully";
@@ -62,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         // Single deletion
         $productID = $data['Product_ID'];
 
-        $stmt = $conn->prepare("DELETE FROM test_table WHERE Product_ID=?");
+        $stmt = $conn->prepare("DELETE FROM product_table WHERE Product_ID=?");
         $stmt->bind_param("s", $productID);
 
         if ($stmt->execute()) {
@@ -78,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
         // Create a placeholder string for the query
         $placeholders = implode(',', array_fill(0, count($productIds), '?'));
-        $stmt = $conn->prepare("DELETE FROM test_table WHERE Product_ID IN ($placeholders)");
+        $stmt = $conn->prepare("DELETE FROM product_table WHERE Product_ID IN ($placeholders)");
 
         if ($stmt) {
             // Bind parameters
