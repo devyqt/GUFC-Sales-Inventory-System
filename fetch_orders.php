@@ -3,7 +3,7 @@
 include 'db_connection.php';
 
 // SQL query to fetch data from the order_table
-$sql = "SELECT Order_ID, Customer_Name, Product_ID, Order_Date FROM order_table";
+$sql = "SELECT Order_ID, Customer_Name, Product_ID, Order_Date, Order_Status FROM order_table";
 $result = $conn->query($sql);
 
 $output = '';
@@ -21,9 +21,27 @@ if ($result->num_rows > 0) {
         $output .= "<td>" . $row['Product_ID'] . "</td>";
         $output .= "<td>" . ($product_row ? $product_row['Product_Name'] : 'Unknown') . "</td>";
         $output .= "<td>" . ($product_row ? $product_row['Product_Price'] : 'N/A') . "</td>";
-        $output .= "<td>" . $row['Order_Date'] . "</td>";
+        
+        // Dropdown for status
+        $statusOptions = [
+            'Pending' => 'Pending',
+            'Processing' => 'Processing',
+            'Completed' => 'Completed',
+            'Cancelled' => 'Cancelled'
+        ];
+
         $output .= "<td>
-                        <button class='btn-edit'>Edit</button>
+                        <select class='status-dropdown' data-order-id='" . $row['Order_ID'] . "'>";
+        foreach ($statusOptions as $value => $label) {
+            $selected = ($row['Order_Status'] == $value) ? 'selected' : '';
+            $output .= "<option value='$value' $selected>$label</option>";
+        }
+        $output .= "</select>
+                    </td>";
+
+        $output .= "<td>" . $row['Order_Date'] . "</td>";
+        
+        $output .= "<td>
                         <button class='btn-delete' onclick='deleteOrder(\"" . $row['Order_ID'] . "\")'>Delete</button>
                     </td>";
         $output .= "</tr>";

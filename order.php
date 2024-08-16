@@ -3,11 +3,11 @@
 include 'db_connection.php';
 
 // SQL query to fetch data from the order_table
-$sql = "SELECT Order_ID, Customer_Name, Product_ID, Order_Date FROM order_table";
+$sql = "SELECT Order_ID, Customer_Name, Product_ID, Order_Date, Order_Status FROM order_table";
 $result = $conn->query($sql);
 
 // SQL query to fetch available products from the product_table
-$product_sql = "SELECT Product_ID, Product_Name, Product_Price FROM product_table";
+$product_sql = "SELECT Product_ID, Product_Name, Product_Price, Product_Date FROM product_table";
 $product_result = $conn->query($product_sql);
 
 // Fetch IDs of already ordered products
@@ -20,7 +20,6 @@ if ($ordered_products_result->num_rows > 0) {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,11 +39,12 @@ if ($ordered_products_result->num_rows > 0) {
 
   <section class="main">
     <div class="tab-container">
-      <!-- Category Tabs -->
-      <ul class="tabs">
-        <li><a href="#pending-orders" class="tab-link active">Pending Orders</a></li>
-        <li><a href="#completed-orders" class="tab-link">Completed Orders</a></li>
-      </ul>
+    <ul class="tabs">
+        <li><a href="#" class="tab-link active" data-status="Pending">Pending Orders</a></li>
+        <li><a href="#" class="tab-link" data-status="Completed">Completed Orders</a></li>
+    </ul>
+
+
 
       <!-- Tab Content -->
       <div class="tab-content">
@@ -79,42 +79,21 @@ if ($ordered_products_result->num_rows > 0) {
                     <th>Item Name</th>
                     <th>Price</th> <!-- Added Price column -->
                     <th>Order Date</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+                
             <?php
-            // Check if there are results and display them
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    // Fetch product details from product_table
-                    $product_query = "SELECT Product_Name, Product_Price FROM product_table WHERE Product_ID = '" . $row['Product_ID'] . "'";
-                    $product_result_inner = $conn->query($product_query);
-                    $product_row = $product_result_inner->fetch_assoc();
-
-                    echo "<tr>";
-                    echo "<td><input type='checkbox' name='selectOrder' value='" . $row['Order_ID'] . "'></td>";
-                    echo "<td>" . $row['Order_ID'] . "</td>";
-                    echo "<td>" . $row['Customer_Name'] . "</td>";
-                    echo "<td>" . $row['Product_ID'] . "</td>";
-                    echo "<td>" . ($product_row ? $product_row['Product_Name'] : 'Unknown') . "</td>";
-                    echo "<td>" . ($product_row ? $product_row['Product_Price'] : 'N/A') . "</td>"; // Display Price
-                    echo "<td>" . $row['Order_Date'] . "</td>";
-                    echo "<td>
-                            <button class='btn-delete' onclick='deleteOrder(\"" . $row['Order_ID'] . "\")'>Delete</button>
-                        </td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='8'>No orders found</td></tr>";
-            }
+            include 'fetch_orders.php';
             ?>
+
             </tbody>
         </table>
+        </div>
+    </section>
     </div>
-  </section>
-</div>
-
 
 <!-- Modal HTML -->
 <div id="orderModal" class="modal">
@@ -139,7 +118,11 @@ if ($ordered_products_result->num_rows > 0) {
           if ($product_result->num_rows > 0) {
               while($product_row = $product_result->fetch_assoc()) {
                   if (!in_array($product_row['Product_ID'], $ordered_products)) {
-                      echo "<option value='" . $product_row['Product_ID'] . "'>" . $product_row['Product_Name'] . "</option>";
+                      echo "<option value='" . $product_row['Product_ID'] . "'>"
+                          . $product_row['Product_ID'] . " - " 
+                          . $product_row['Product_Name'] . " (" 
+                          . $product_row['Product_Date'] . ")"
+                          . "</option>";
                   }
               }
           } else {
@@ -149,6 +132,16 @@ if ($ordered_products_result->num_rows > 0) {
         </select>
       </div>
       <div class="form-group">
+    <label for="orderStatus">Order Status:</label>
+    <select id="orderStatus" name="orderStatus" class="form-control" disabled>
+        <option value="Pending" selected>Pending</option>
+        <option value="Processing">Processing</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+    </select>
+</div>
+
+      <div class="form-group">
         <label for="orderDate">Order Date:</label>
         <input type="date" id="orderDate" name="orderDate" class="form-control" required>
       </div>   
@@ -156,7 +149,6 @@ if ($ordered_products_result->num_rows > 0) {
     </form>
   </div>
 </div>
-
 
 <script src="JS/order.js"></script>
 </body>
@@ -166,4 +158,3 @@ if ($ordered_products_result->num_rows > 0) {
 // Close the database connection
 $conn->close();
 ?>
-

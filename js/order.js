@@ -1,6 +1,5 @@
 // Function to open the order modal
 function openOrderModal() {
-    // Update dropdown and reset form when opening the modal
     updateDropdown();
     clearModalForm();
     document.getElementById('orderModal').style.display = 'block';
@@ -40,7 +39,7 @@ document.getElementById('addOrderForm').addEventListener('submit', function(even
 
 // Function to load orders into the table
 function loadOrders() {
-    fetch('fetch_orders.php') // Create this file to return the order data
+    fetch('fetch_orders.php')
         .then(response => response.text())
         .then(data => {
             document.querySelector('.order-table tbody').innerHTML = data;
@@ -150,3 +149,39 @@ document.getElementById('deleteSelectedOrders').addEventListener('click', functi
         console.error('Error:', error);
     });
 });
+
+// Function to handle status change
+document.addEventListener('change', function(event) {
+    if (event.target.classList.contains('status-dropdown')) {
+        const dropdown = event.target;
+        const orderId = dropdown.getAttribute('data-order-id');
+        const newStatus = dropdown.value;
+
+        // Send the new status to the server
+        fetch('update_order_status.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ orderId: orderId, status: newStatus })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Order status updated successfully!');
+                loadOrders(); // Refresh the order table
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+});
+
+
+
+
+
+

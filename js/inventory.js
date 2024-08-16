@@ -52,7 +52,7 @@ function fetchProducts() {
                     <td>${product.Product_ID}</td>
                     <td>${product.Product_Name}</td>
                     <td>${product.Product_Price}</td>
-                    <td>${product.date}</td>
+                    <td>${product.Product_Date}</td>
                     <td><button onclick="deleteProduct('${product.Product_ID}')">Delete</button></td>
                 `;
                 tableBody.appendChild(row);

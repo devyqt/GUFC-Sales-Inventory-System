@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error: Product ID already exists.";
     } else {
         // Insert new product
-        $stmt = $conn->prepare("INSERT INTO product_table (Product_ID, Product_Name, Product_Price, date) VALUES (?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO product_table (Product_ID, Product_Name, Product_Price, Product_Date) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $productID, $productName, $productPrice, $productDate);
 
         if ($stmt->execute()) {
