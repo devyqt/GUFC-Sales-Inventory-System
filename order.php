@@ -9,7 +9,18 @@ $result = $conn->query($sql);
 // SQL query to fetch available products from the product_table
 $product_sql = "SELECT Product_ID, Product_Name, Product_Price FROM product_table";
 $product_result = $conn->query($product_sql);
+
+// Fetch IDs of already ordered products
+$ordered_products_sql = "SELECT DISTINCT Product_ID FROM order_table";
+$ordered_products_result = $conn->query($ordered_products_sql);
+$ordered_products = [];
+if ($ordered_products_result->num_rows > 0) {
+    while ($ordered_row = $ordered_products_result->fetch_assoc()) {
+        $ordered_products[] = $ordered_row['Product_ID'];
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -82,7 +93,7 @@ $product_result = $conn->query($product_sql);
                     $product_row = $product_result_inner->fetch_assoc();
 
                     echo "<tr>";
-                    echo "<td><input type='checkbox' name='selectOrder'></td>";
+                    echo "<td><input type='checkbox' name='selectOrder' value='" . $row['Order_ID'] . "'></td>";
                     echo "<td>" . $row['Order_ID'] . "</td>";
                     echo "<td>" . $row['Customer_Name'] . "</td>";
                     echo "<td>" . $row['Product_ID'] . "</td>";
@@ -90,7 +101,6 @@ $product_result = $conn->query($product_sql);
                     echo "<td>" . ($product_row ? $product_row['Product_Price'] : 'N/A') . "</td>"; // Display Price
                     echo "<td>" . $row['Order_Date'] . "</td>";
                     echo "<td>
-                            <button class='btn-edit'>Edit</button>
                             <button class='btn-delete' onclick='deleteOrder(\"" . $row['Order_ID'] . "\")'>Delete</button>
                         </td>";
                     echo "</tr>";
@@ -104,6 +114,7 @@ $product_result = $conn->query($product_sql);
     </div>
   </section>
 </div>
+
 
 <!-- Modal HTML -->
 <div id="orderModal" class="modal">
@@ -122,11 +133,14 @@ $product_result = $conn->query($product_sql);
       <div class="form-group">
         <label for="itemName">Product:</label>
         <select id="itemName" name="itemName" class="form-control" required>
+          <option value="" disabled selected>Select a Product</option> <!-- Default option -->
           <?php
-          // Populate the dropdown with products
+          // Populate the dropdown with products, excluding already ordered products
           if ($product_result->num_rows > 0) {
               while($product_row = $product_result->fetch_assoc()) {
-                  echo "<option value='" . $product_row['Product_ID'] . "'>" . $product_row['Product_Name'] . "</option>";
+                  if (!in_array($product_row['Product_ID'], $ordered_products)) {
+                      echo "<option value='" . $product_row['Product_ID'] . "'>" . $product_row['Product_Name'] . "</option>";
+                  }
               }
           } else {
               echo "<option value=''>No products available</option>";
@@ -143,6 +157,7 @@ $product_result = $conn->query($product_sql);
   </div>
 </div>
 
+
 <script src="JS/order.js"></script>
 </body>
 </html>
@@ -151,3 +166,4 @@ $product_result = $conn->query($product_sql);
 // Close the database connection
 $conn->close();
 ?>
+

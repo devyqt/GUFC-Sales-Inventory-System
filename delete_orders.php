@@ -1,33 +1,29 @@
 <?php
-// Include your database connection file
 include 'db_connection.php';
 
-// Check if the request method is POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve and decode the JSON data from the request
-    $data = json_decode(file_get_contents('php://input'), true);
+header('Content-Type: application/json');
 
-    // Check if 'orders' key exists in the received data
-    if (isset($data['orders']) && is_array($data['orders'])) {
-        $orders = $data['orders'];
+$input = json_decode(file_get_contents('php://input'), true);
+$orderId = $input['orderId'];
 
-        // Prepare a SQL query to delete the orders
-        $orderIds = implode(',', array_map('intval', $orders)); // Convert array to a comma-separated string of integers
-        $sql = "DELETE FROM order_table WHERE Order_ID IN ($orderIds)";
+$response = ['success' => false, 'error' => ''];
 
-        // Execute the query
-        if ($conn->query($sql)) {
-            echo json_encode(['success' => true]);
-        } else {
-            echo json_encode(['success' => false, 'error' => $conn->error]);
-        }
+if ($orderId) {
+    $stmt = $conn->prepare("DELETE FROM order_table WHERE Order_ID = ?");
+    $stmt->bind_param("i", $orderId);
+    
+    if ($stmt->execute()) {
+        $response['success'] = true;
     } else {
-        echo json_encode(['success' => false, 'error' => 'No orders specified']);
+        $response['error'] = 'Failed to delete the order';
     }
 
-    // Close the database connection
-    $conn->close();
+    $stmt->close();
 } else {
-    echo json_encode(['success' => false, 'error' => 'Invalid request method']);
+    $response['error'] = 'Invalid order ID';
 }
+
+$conn->close();
+
+echo json_encode($response);
 ?>
