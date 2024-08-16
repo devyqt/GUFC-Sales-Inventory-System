@@ -43,11 +43,12 @@ if ($result->num_rows > 0) {
         
         $output .= "<td>
                         <button class='btn-delete' onclick='deleteOrder(\"" . $row['Order_ID'] . "\")'>Delete</button>
+                        <button class='btn-print' onclick='printInvoice(\"" . $row['Order_ID'] . "\")'>Print Invoice</button>
                     </td>";
         $output .= "</tr>";
     }
 } else {
-    $output .= "<tr><td colspan='8'>No orders found</td></tr>";
+    $output .= "<tr><td colspan='9'>No orders found</td></tr>";
 }
 
 echo $output;

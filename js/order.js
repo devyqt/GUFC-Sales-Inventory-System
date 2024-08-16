@@ -181,6 +181,63 @@ document.addEventListener('change', function(event) {
 });
 
 
+// Existing code...
+
+// Function to print invoice
+function printInvoice(orderID) {
+    fetch(`get_order_details.php?orderID=${orderID}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const invoiceContent = `
+                    <html>
+                    <head>
+                        <style>
+                            body { font-family: Arial, sans-serif; }
+                            .invoice { max-width: 800px; margin: auto; padding: 20px; border: 1px solid #ccc; }
+                            .invoice-header { text-align: center; margin-bottom: 20px; }
+                            .invoice-details { margin-bottom: 20px; }
+                            .invoice-item { margin-bottom: 10px; }
+                            .invoice-footer { text-align: center; margin-top: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="invoice">
+                            <div class="invoice-header">
+                                <h1>Invoice</h1>
+                                <p>Order ID: ${data.order.Order_ID}</p>
+                            </div>
+                            <div class="invoice-details">
+                                <p><strong>Customer Name:</strong> ${data.order.Customer_Name}</p>
+                                <p><strong>Order Date:</strong> ${data.order.Order_Date}</p>
+                                <p><strong>Status:</strong> ${data.order.Order_Status}</p>
+                            </div>
+                            <div class="invoice-item">
+                                <p><strong>Product ID:</strong> ${data.order.Product_ID}</p>
+                                <p><strong>Product Name:</strong> ${data.order.Product_Name}</p>
+                                <p><strong>Product Price:</strong> ${data.order.Product_Price}</p>
+                            </div>
+                            <div class="invoice-footer">
+                                <button onclick="window.print()">Print</button>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                `;
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(invoiceContent);
+                printWindow.document.close();
+                printWindow.focus();
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// Existing code...
 
 
 
