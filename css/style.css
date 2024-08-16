@@ -24,62 +24,82 @@ body {
 }
 
 /* Navigation Styles */
+/* Navigation Styles */
+/* Navigation Styles */
 nav {
   position: relative;
   height: 100vh;
   width: 280px;
-  background: #fff;
+  background: #013b99; /* Background color */
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  padding-top: 20px; /* Add padding at the top to space out the content */
 }
 
 nav .logo {
-  text-align: center;
   display: flex;
   align-items: center;
-  margin: 10px;
+  justify-content: flex-start; /* Align items to the start of the container */
+  padding: 0px 0px; /* Add padding around the logo */
+  
 }
 
-nav .logo img {
+.logo img {
   width: 45px;
   height: 45px;
   border-radius: 50%;
+  margin-right: 10px; /* Space between the logo image and the text */
 }
 
 nav .logo span {
   font-weight: bold;
-  padding-left: 15px;
   font-size: 18px;
   text-transform: uppercase;
+  color: white; /* Ensure text is visible on the blue background */
+  white-space: nowrap; /* Prevent the text from wrapping to the next line */
+
 }
 
+
+
 nav a {
-  color: rgb(85, 83, 83);
-  font-size: 14px;
+  color: white; /* Updated text color for better visibility */
+  font-size: 16px; /* Slightly increase the font size */
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 15px 20px; /* Adjust padding for better spacing */
   text-decoration: none;
   width: 100%;
 }
 
 nav a:hover {
-  background: #eee;
+  background: #575757; /* Darker hover effect */
 }
 
 nav .fas {
   font-size: 20px;
-  margin-right: 10px;
+  margin-right: 15px; /* Space between icon and text */
+  margin-left: 20px;
 }
 
 .nav-item {
-  margin-left: 10px;
+  margin-left: 10px; /* Adjusted to better align with icons */
 }
 
 nav .logout {
   position: absolute;
-  bottom: 0;
+  bottom: 20px; /* Add spacing from the bottom */
+  width: 80%;
+  padding: 15px 20px; /* Consistent padding */
+  background: #c82333; /* Different background color for logout button */
+  color: white;
+  text-align: center; /* Center text for logout button */
 }
+
+nav .logout:hover {
+  background: #fafafa; /* Darker hover effect for logout button */
+}
+
 
 /* Modal Styles */
 .modal {
@@ -165,3 +185,4 @@ input[type="submit"]:hover {
 .box button:hover {
   background: rgba(0, 0, 0, 0.842);
 }
+
