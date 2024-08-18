@@ -1,0 +1,161 @@
+/* General styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #2a3f54;
+    color: #fff;
+    padding: 15px 20px;
+}
+
+.navbar .logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.navbar .navbar-toggler {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+}
+
+/* Main content */
+.main-content {
+    margin-left: 280px; /* Adjusted to match the sidebar width */
+    padding: 20px;
+    overflow: auto;
+}
+
+/* Customer Table */
+.table-hover tbody tr:hover {
+    background-color: #e3e8f3;
+}
+
+.table thead th {
+    background-color: #2a3f54;
+    color: #fff;
+    border-bottom: none;
+    padding: 15px 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.table tbody td {
+    padding: 15px 10px;
+    color: #333;
+    vertical-align: middle;
+    text-align: left;
+    border-bottom: 1px solid #e3e8f3;
+}
+
+.table tbody tr td img.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #1d80bf;
+    border-color: #1d80bf;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.btn-primary:hover {
+    background-color: #1a6fa9;
+    border-color: #1a6fa9;
+}
+
+.btn-outline-secondary {
+    border-color: #ddd;
+    color: #555;
+    border-radius: 5px;
+    padding: 8px 15px;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f3f3f3;
+    color: #333;
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding-bottom: 10px;
+}
+
+.modal-footer {
+    border-top: none;
+    padding-top: 10px;
+}
+
+/* Button Alignment */
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-set-task {
+    background-color: #1d80bf;
+    border-color: #1d80bf;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-set-task:hover {
+    background-color: #1a6fa9;
+    border-color: #1a6fa9;
+}
+
+/* Adjust margin for table container */
+.table-container {
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .main-content {
+        margin-left: 0;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar .logout {
+        margin-top: 10px;
+    }
+}
