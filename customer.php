@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>SOLANE GUFC : CUSTOMER</title>
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/customer.css">
+    <link rel="stylesheet" href="CSS/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="CSS/customer.css?v=<?php echo time(); ?>">
     <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -17,7 +17,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="fw-bold mb-0">Customers Information</h3>
         <button type="button" class="btn btn-primary btn-set-task" data-bs-toggle="modal" data-bs-target="#expadd">
-            <i class="icofont-plus-circle me-2 fs-6"></i>Add Customer
+            <i class="icofont-plus-circle me-2 fs-6"></i>Add Customer</button>
         </button>
     </div>
 

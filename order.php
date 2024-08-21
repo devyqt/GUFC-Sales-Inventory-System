@@ -26,9 +26,9 @@ if ($ordered_products_result->num_rows > 0) {
 <head>
   <meta charset="UTF-8">
   <title>ORDERS</title>
-  <link rel="stylesheet" href="CSS/style.css">
-  <link rel="stylesheet" href="CSS/order.css">
-  <link rel="stylesheet" href="CSS/modal.css">
+  <link rel="stylesheet" href="CSS/style.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="CSS/order.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="CSS/modal.css?v=<?php echo time(); ?>">
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
