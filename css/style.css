@@ -99,11 +99,12 @@ nav .fas {
 nav .logout {
   position: absolute;
   bottom: 20px;
-  width: 80%;
+  width: 60%;
   padding: 15px 20px;
   background: #c82333;
   color: white;
   text-align: center;
+  margin-left: 30px;
 }
 
 nav .logout:hover {
