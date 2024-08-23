@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productPrice = $_POST['product_price'];
     $productDate = $_POST['product_date'];
 
-    // Check if the Product_ID already exists
+    // Check if the product ID already exists
     $stmt = $conn->prepare("SELECT COUNT(*) FROM product_table WHERE product_id=?");
     $stmt->bind_param("s", $productID);
     $stmt->execute();
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
             echo "Error preparing statement: " . $conn->error;
         }
     } else {
-        echo "Product_ID or Product_IDs are required for deletion.";
+        echo "product_id or product_ids are required for deletion.";
     }
 }
 
