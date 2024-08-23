@@ -67,13 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         // Multiple deletions
         $productIds = $data['Product_IDs'];
 
-        // Create a placeholder string for the query
+    
         $placeholders = implode(',', array_fill(0, count($productIds), '?'));
         $stmt = $conn->prepare("DELETE FROM product_table WHERE Product_ID IN ($placeholders)");
 
         if ($stmt) {
-            // Bind parameters
-            $types = str_repeat('s', count($productIds)); // Assuming IDs are strings
+    
+            $types = str_repeat('s', count($productIds));
             $stmt->bind_param($types, ...$productIds);
 
             if ($stmt->execute()) {

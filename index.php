@@ -74,24 +74,85 @@ $conn->close();
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
 </head>
 <body>
 <div class="container">
   <?php include 'navbar.html'; ?>
+
+  <!-- Admin Profile Component Start -->
+  <div class="admin-profile">
+    <div class="profile-info">
+        <div class="profile-name">Solane Admin</div>
+        <div class="profile-role">Admin Profile</div>
+    </div>
+    <div class="profile-image">
+        <img src="images/admin logo.png" alt="Profile Avatar"> <!-- Replace with the path to your image -->
+    </div>
+    <div class="settings-icon">
+        <img src="images/settings.png" alt="Settings"> <!-- Replace with the path to your settings icon -->
+    </div>
+  </div>
+  <!-- Admin Profile Component End -->
+
   <section class="dashboard">
     <h2>DASHBOARD</h2>
     <br>
     <div class="metrics">
-      <div class="total-products"><span>Total Products</span><p id="totalProducts"><?php echo $totalProducts; ?></p></div>
-      <div class="sales-today"><span>Sales Today</span><p id="salesToday"><?php echo number_format($salesToday, 2); ?></p></div>
-      <div class="total-sales"><span>Total Sales</span><p id="totalSales"><?php echo number_format($totalSales, 2); ?></p></div>
+        <div class="total-products"><span>Total Products</span><p id="totalProducts"><?php echo $totalProducts; ?></p></div>
+        <div class="sales-today"><span>Sales Today</span><p id="salesToday"><?php echo number_format($salesToday, 2); ?></p></div>
+        <div class="total-sales"><span>Total Sales</span><p id="totalSales"><?php echo number_format($totalSales, 2); ?></p></div>
     </div>
+    
+    <div class="right-box">
+   <!-- Navigation Map -->
+   <div class="store-map">
+    <h4>Our Branch Location & Revenue</h4>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15441.577753574738!2d121.1214809!3d14.6335372!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b9f23793fe4f%3A0x75ecbe87baad67d9!2sSolane%20Gufc!5e0!3m2!1sen!2sph!4v1724246221404!5m2!1sen!2sph"></iframe>
+    </iframe>
+  </div>
+
+  <!-- Rating Bars -->
+  <div class="rating-bars">
+    <div class="rating-item">
+      <span>Marikina</span>
+      <div class="progress-bar" style="width: 80%; background-color: #0000FF;"></div>
+    </div>
+    <div class="rating-item">
+      <span>Andrei Store</span>
+      <div class="progress-bar" style="width: 70%; background-color: #008000;"></div>
+    </div>
+    <div class="rating-item">
+      <span>Mandala</span>
+      <div class="progress-bar" style="width: 90%; background-color: #00FFFF;"></div>
+    </div>
+    <div class="rating-item">
+      <span>Taguig</span>
+      <div class="progress-bar" style="width: 60%; background-color: #FFA500;"></div>
+    </div>
+    <div class="rating-item">
+      <span>Out of stock</span>
+      <div class="progress-bar" style="width: 50%; background-color: #FF0000;"></div>
+    </div>
+  </div>
+
+  <!-- Out of Stock Warning -->
+  <div class="out-of-stock-warning">
+    <h4>Out of Stock Warning!</h4>
+    <p>The following items are out of stock: 11kg Auto-Shutoff Cylinder, 50kg Cylinder.</p>
+  </div>
+</div>
+
+
     <div class="sales-overview">
-      <h3>Sales Overview</h3>
-      <!-- The canvas element for the chart -->
-      <canvas id="salesChart"></canvas>
+        <h3>Sales Overview</h3>
+        <!-- The canvas element for the chart -->
+        <canvas id="salesChart"></canvas>
     </div>
-  </section>
+</section>
+
 </div>
 
 <!-- Script for the chart -->
@@ -128,4 +189,3 @@ $conn->close();
 </script>
 </body>
 </html>
-

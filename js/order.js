@@ -237,6 +237,16 @@ function printInvoice(orderID) {
         });
 }
 
+<script>
+    function openOrderModal() {
+        document.getElementById("addOrderModal").style.display = "block";
+    }
+
+    function closeOrderModal() {
+        document.getElementById("addOrderModal").style.display = "none";
+    }
+</script>
+
 // Existing code...
 
 

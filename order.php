@@ -54,7 +54,8 @@ if ($ordered_products_result->num_rows > 0) {
             <!-- Order items will be displayed here -->
           </div>
           <!-- Add Order Button -->
-          <button class="add-order-button" onclick="openOrderModal()">Add Order</button>
+          <button class="add-product-button" onclick="openProductModal()">Add Product</button>
+
         </div>
 
         <!-- Completed Orders Tab -->
@@ -93,62 +94,46 @@ if ($ordered_products_result->num_rows > 0) {
         </table>
         </div>
     </section>
+    </div>  
+
+    <div id="addProductModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeProductModal()">&times;</span>
+        <h3>Add Product</h3>
+        <form id="addProductForm" action="add_product_proc.php" method="POST">
+            <div class="product-list">
+                <label><input type="checkbox" name="products[]" value="Abc-121-123 - 22kg POL Cylinder"> Abc-121-123 - 22kg POL Cylinder</label>
+                <label><input type="checkbox" name="products[]" value="Abc-121-124 - 22kg POL Cylinder"> Abc-121-124 - 22kg POL Cylinder</label>
+                <label><input type="checkbox" name="products[]" value="Abc-121-125 - 22kg POL Cylinder"> Abc-121-125 - 22kg POL Cylinder</label>
+                <label><input type="checkbox" name="products[]" value="Abc-121-126 - 22kg POL Cylinder"> Abc-121-126 - 22kg POL Cylinder</label>
+                <label><input type="checkbox" name="products[]" value="Abc-121-127 - 22kg POL Cylinder"> Abc-121-127 - 22kg POL Cylinder</label>
+                <!-- Add more products as needed -->
+            </div>
+            <div class="form-group">
+                <label for="productID">Product ID:</label>
+                <input type="text" id="productID" name="productID" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" name="customerName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="orderDate">Order Date:</label>
+                <input type="date" id="orderDate" name="orderDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
+            </div>
+            <button type="submit" class="btn-submit">Submit</button>
+        </form>
     </div>
-
-<!-- Modal HTML -->
-<div id="orderModal" class="modal">
-  <div class="modal-content">
-    <span class="close-button" onclick="closeOrderModal()">&times;</span>
-    <h3>Add Order</h3>
-    <form id="addOrderForm" action="order_proc.php" method="POST">
-      <div class="form-group">
-        <label for="orderID">Order ID:</label> 
-        <input type="text" id="orderID" name="orderID" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="customerName">Customer Name:</label>
-        <input type="text" id="customerName" name="customerName" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="itemName">Product:</label>
-        <select id="itemName" name="itemName" class="form-control" required>
-          <option value="" disabled selected>Select a Product</option> <!-- Default option -->
-          <?php
-          // Populate the dropdown with products, excluding already ordered products
-          if ($product_result->num_rows > 0) {
-              while($product_row = $product_result->fetch_assoc()) {
-                  if (!in_array($product_row['Product_ID'], $ordered_products)) {
-                      echo "<option value='" . $product_row['Product_ID'] . "'>"
-                          . $product_row['Product_ID'] . " - " 
-                          . $product_row['Product_Name'] . " (" 
-                          . $product_row['Product_Date'] . ")"
-                          . "</option>";
-                  }
-              }
-          } else {
-              echo "<option value=''>No products available</option>";
-          }
-          ?>
-        </select>
-      </div>
-      <div class="form-group">
-    <label for="orderStatus">Order Status:</label>
-    <select id="orderStatus" name="orderStatus" class="form-control" disabled>
-        <option value="Pending" selected>Pending</option>
-        <option value="Processing">Processing</option>
-        <option value="Completed">Completed</option>
-        <option value="Cancelled">Cancelled</option>
-    </select>
 </div>
+<script>
+    function closeProductModal() {
+        document.getElementById("addProductModal").style.display = "none";
+    }
 
-      <div class="form-group">
-        <label for="orderDate">Order Date:</label>
-        <input type="date" id="orderDate" name="orderDate" class="form-control" required>
-      </div>   
-      <button type="submit" class="btn-submit">Submit</button>
-    </form>
-  </div>
-</div>
+    function openProductModal() {
+        document.getElementById("addProductModal").style.display = "block";
+    }
+</script>
 
 <script src="JS/order.js"></script>
 </body>
