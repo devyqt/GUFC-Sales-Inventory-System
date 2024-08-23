@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // Add new product
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $productID = $_POST['product_id'];
-    $productName = $_POST['product_name'];
-    $productPrice = $_POST['product_price'];
-    $productDate = $_POST['product_date'];
+    $productID = $_POST['productID'];
+    $productName = $_POST['productName'];
+    $productPrice = $_POST['productPrice'];
+    $productDate = $_POST['productDate'];
 
-    // Check if the product ID already exists
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM product_table WHERE product_id=?");
+    // Check if the Product_ID already exists
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM product_table WHERE Product_ID=?");
     $stmt->bind_param("s", $productID);
     $stmt->execute();
     $stmt->bind_result($count);
@@ -33,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error: Product ID already exists.";
     } else {
         // Insert new product
-        $stmt = $conn->prepare("INSERT INTO product_table (product_id, Product_Name, Product_Price, Product_Date) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssds", $productID, $productName, $productPrice, $productDate);
+        $stmt = $conn->prepare("INSERT INTO product_table (Product_ID, Product_Name, Product_Price, Product_Date) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $productID, $productName, $productPrice, $productDate);
 
         if ($stmt->execute()) {
             echo "New product added successfully";
@@ -89,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         echo "product_id or product_ids are required for deletion.";
     }
 }
+
 
 $conn->close();
 ?>
