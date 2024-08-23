@@ -23,20 +23,14 @@ html, body {
     margin-top: 82px;
     padding: 100px;
     background: #f1f5f8;
-    min-height: 0vh;
+    min-height: 80vh;
     transition: margin-left 0.3s; /* Smooth transition if width changes */
-    box-sizing: border-box; /* Include padding and border in the element's total width */
     width: 1150px;
     position: center;
   
     
   }
   
-  /* Tab Container Styles */
-  .tab-container {
-    width: 100%;
-    box-sizing: border-box;
-  }
   
   /* Tabs Container */
   .tabs {
@@ -45,9 +39,11 @@ html, body {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    background: #f1f1f1;
+    background: #e03434;
     width: 100%;
   }
+  
+  
   
   /* Individual Tab Links */
   .tabs li {
@@ -76,15 +72,6 @@ html, body {
     background: #bbb;
   }
   
-  /* Tab Content Styles */
-  .tab-content {
-    padding: 20px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 0 0 5px 5px;
-    width: 100%;
-  }
-  
   /* Ensure active tab pane is visible */
   .tab-pane {
     display: none;
@@ -103,12 +90,23 @@ html, body {
     justify-content: flex-start;
     padding: 0 20px;
     box-sizing: border-box;
+    
   }
   
   /* Add Order Button */
   .add-order-button {
     padding: 10px 20px;
     background-color: #148a2d;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto; 
+  }
+
+  .btn-delete {
+    padding: 10px 10px;
+    background-color: rgb(240, 10, 10);
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -178,4 +176,178 @@ html, body {
     margin-left: 10px;
   }
   
-  
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 15px;
+  border: 1px solid #ddd;
+  width: 90%;
+  max-width: 1000px;
+  min-height: 600px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Close Button Styling */
+.close-button {
+  color: #444;
+  float: right;
+  font-size: 24px; /* Reduced size */
+  font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: none;
+  margin-top: -10px;
+  transition: color 0.3s;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Modal Title Styling */
+.modal-title {
+  text-align: center;
+  font-size: 20px; /* Reduced size */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+/* Product List Styling */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 10px; /* Space between products */
+  padding: 0;
+  margin: 0;
+}
+
+/* Product Item Styling */
+.product-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  gap: 5px;
+  box-sizing: border-box; 
+  font-size: 10px; /* Smaller text */
+
+}
+
+/* Product Image Styling */
+.product-img {
+  width: 70px;  /* Smaller size */
+  height: 70px;
+  object-fit: cover;
+}
+
+/* Product Info Styling */
+.product-info {
+  font-size: 10px; /* Smaller text */
+  text-align: center;
+}
+
+/* Product Price and Quantity Styling */
+.product-price,
+.product-quantity {
+  font-size: 10px; /* Smaller text */
+  text-align: center;
+}
+
+/* Product Quantity Styling */
+.product-quantity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.product-quantity label {
+  font-size: 10px; /* Smaller text */
+}
+
+.product-quantity input[type="number"] {
+  width: 40px; /* Smaller size */
+  padding: 2px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 10px; /* Smaller text */
+}
+
+/* Customer Type Section Styling */
+.customer-type {
+  text-align: center;
+  margin-top: 20px;
+
+}
+
+.customer-select {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+
+/* Select Group Styling */
+.select-group {
+  margin: 0;
+}
+
+/* Order Date Styling */
+.order-date {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.order-date label {
+  display: block;
+  font-size: 10px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+/* Submit Button Styling */
+.btn-submit {
+  display: block;
+  width: 70%;
+  padding: 8px;  /* Reduced padding */
+  background-color: #006400;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px; /* Smaller text */
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+  text-align: center;
+  margin-left: 75px;
+}
+
+/* Submit Button Hover Effect */
+.btn-submit:hover {
+  background-color: #004d00;
+}

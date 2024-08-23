@@ -28,7 +28,7 @@ if ($ordered_products_result->num_rows > 0) {
   <title>ORDERS</title>
   <link rel="stylesheet" href="CSS/style.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="CSS/order.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="CSS/modal.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="CSS/ordermodal.css?v=<?php echo time(); ?>">
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -40,36 +40,17 @@ if ($ordered_products_result->num_rows > 0) {
   <section class="main">
     <div class="tab-container">
     <ul class="tabs">
-        <li><a href="#" class="tab-link active" data-status="Pending">Pending Orders</a></li>
-        <li><a href="#" class="tab-link" data-status="Completed">Completed Orders</a></li>
+
     </ul>
-
-
-
       <!-- Tab Content -->
       <div class="tab-content">
-        <!-- Pending Orders Tab -->
-        <div id="pending-orders" class="tab-pane active">
           <div class="order-container">
-            <!-- Order items will be displayed here -->
           </div>
           <!-- Add Order Button -->
           <button class="add-product-button" onclick="openProductModal()">Add Product</button>
-
-        </div>
-
-        <!-- Completed Orders Tab -->
-        <div id="completed-orders" class="tab-pane">
-          <div class="order-container">
-            <!-- Order items will be displayed here -->
-          </div>
-        </div>
-      </div>
-    </div>
-
+          <button id="deleteSelectedOrders" class="btn-delete">Delete Selected</button>
     <!-- Order Table -->
     <div class="order-table">
-        <button id="deleteSelectedOrders" class="btn-delete">Delete Selected</button>
         <table id="orderTable">
             <thead>
                 <tr>
@@ -96,45 +77,131 @@ if ($ordered_products_result->num_rows > 0) {
     </section>
     </div>  
 
-    <div id="addProductModal" class="modal">
+<!-- Button to open the modal -->
+<button onclick="openProductModal()">Add Product</button>
+<!-- Modal Structure -->
+<div id="orderModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
     <div class="modal-content">
-        <span class="close-button" onclick="closeProductModal()">&times;</span>
-        <h3>Add Product</h3>
-        <form id="addProductForm" action="add_product_proc.php" method="POST">
-            <div class="product-list">
-                <label><input type="checkbox" name="products[]" value="Abc-121-123 - 22kg POL Cylinder"> Abc-121-123 - 22kg POL Cylinder</label>
-                <label><input type="checkbox" name="products[]" value="Abc-121-124 - 22kg POL Cylinder"> Abc-121-124 - 22kg POL Cylinder</label>
-                <label><input type="checkbox" name="products[]" value="Abc-121-125 - 22kg POL Cylinder"> Abc-121-125 - 22kg POL Cylinder</label>
-                <label><input type="checkbox" name="products[]" value="Abc-121-126 - 22kg POL Cylinder"> Abc-121-126 - 22kg POL Cylinder</label>
-                <label><input type="checkbox" name="products[]" value="Abc-121-127 - 22kg POL Cylinder"> Abc-121-127 - 22kg POL Cylinder</label>
-                <!-- Add more products as needed -->
+        <!-- Close button -->
+        <button class="close-button" onclick="closeProductModal()" aria-label="Close Modal">&times;</button>
+        <h2 class="modal-title" id="modalTitle">ADD PRODUCT</h2>
+        
+        <!-- Product List -->
+        <div class="product-list">
+            <!-- Product 1 -->
+            <div class="product-item">
+                <input type="checkbox" aria-label="Select Product 1">
+                <img src="images/Auto-Shutoff.jpg" alt="Product Name 1" class="product-img">
+                <div class="product-info">
+                    <h4>11kg Auto-Shutoff Cylinder</h4>
+                </div>
+                <div class="product-price">
+                    <p>$10.00</p>
+                </div>
+                <div class="product-quantity">
+                    <label for="quantity1">Quantity</label>
+                    <input type="number" id="quantity1" name="quantity1" value="1" min="1">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="productID">Product ID:</label>
-                <input type="text" id="productID" name="productID" class="form-control" required>
+
+            <!-- Product 2 -->
+            <div class="product-item">
+                <input type="checkbox" aria-label="Select Product 2">
+                <img src="images/1.4KGSAKTO.jpg" alt="Product Name 2" class="product-img">
+                <div class="product-info">
+                    <h4>1.4kg Solane Sakto</h4>
+                </div>
+                <div class="product-price">
+                    <p>$15.00</p>
+                </div>
+                <div class="product-quantity">
+                    <label for="quantity2">Quantity</label>
+                    <input type="number" id="quantity2" name="quantity2" value="1" min="1">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="customerName">Customer Name:</label>
-                <input type="text" id="customerName" name="customerName" class="form-control" required>
+
+            <!-- Product 3 -->
+            <div class="product-item">
+                <input type="checkbox" aria-label="Select Product 3">
+                <img src="images/22KG POL.jpg" alt="Product Name 3" class="product-img">
+                <div class="product-info">
+                    <h4>22kg POL Cylinder</h4>
+                </div>
+                <div class="product-price">
+                    <p>$20.00</p>
+                </div>
+                <div class="product-quantity">
+                    <label for="quantity3">Quantity</label>
+                    <input type="number" id="quantity3" name="quantity3" value="1" min="1">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="orderDate">Order Date:</label>
-                <input type="date" id="orderDate" name="orderDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
+
+            <!-- Product 4 -->
+            <div class="product-item">
+                <input type="checkbox" aria-label="Select Product 4">
+                <img src="images/50KG CYLINDER.jpg" alt="Product Name 4" class="product-img">
+                <div class="product-info">
+                    <h4>50kg Cylinder</h4>
+                </div>
+                <div class="product-price">
+                    <p>$25.00</p>
+                </div>
+                <div class="product-quantity">
+                    <label for="quantity4">Quantity</label>
+                    <input type="number" id="quantity4" name="quantity4" value="1" min="1">
+                </div>
             </div>
-            <button type="submit" class="btn-submit">Submit</button>
-        </form>
+        </div>
+
+        <!-- Customer Type Section -->
+        <div class="customer-type">
+            <h4>Type of Customer</h4>
+            <div class="customer-select">
+                <div class="select-group">
+                    <label for="fixCustomer">Fix Customer</label>
+                    <select id="fixCustomer" name="fixCustomer" aria-label="Select Fix Customer">
+                        <!-- Options here -->
+                    </select>
+                </div>
+                <div class="select-group">
+                    <label for="otherCustomer">Other</label>
+                    <select id="otherCustomer" name="otherCustomer" aria-label="Select Other Customer">
+                        <!-- Options here -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Date -->
+        <div class="order-date">
+            <label for="orderDate">Order Date</label>
+            <input type="date" id="orderDate" name="orderDate">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit">SUBMIT</button>
     </div>
 </div>
+
 <script>
-    function closeProductModal() {
-        document.getElementById("addProductModal").style.display = "none";
+    // Function to open the modal
+    function openProductModal() {
+        document.getElementById("orderModal").style.display = "block";
     }
 
-    function openProductModal() {
-        document.getElementById("addProductModal").style.display = "block";
+    // Function to close the modal
+    function closeProductModal() {
+        document.getElementById("orderModal").style.display = "none";
+    }
+
+    // Close the modal if user clicks outside the modal content
+    window.onclick = function(event) {
+        var modal = document.getElementById("orderModal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
     }
 </script>
-
 <script src="JS/order.js"></script>
 </body>
 </html>
