@@ -73,10 +73,14 @@
       </div>
     </div>
 
+
+    
+    <button id="deleteSelected" class="btn-delete">Delete Selected</button>
+    <button onclick="printTable()" class="btn-print no-print">Print Table</button>
     <!-- Product Table -->
-    <div class="product-table">
-        <button id="deleteSelected" class="btn-delete">Delete Selected</button>
-        <table id="productTable">
+    <div class="product-table" id="printableArea">
+        
+        <table id="productTable" class="print-table">
             <thead>
                 <tr>
                     <th>Select</th>
@@ -84,6 +88,7 @@
                     <th>Product Name</th>
                     <th>Price</th>
                     <th>Date</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -110,7 +115,7 @@
         <select id="productName" name="productName" class="form-control" required>
           <option value="">Select Cylinder</option>
           <option value="11kg Auto-Shutoff Cylinder">11kg Auto-Shutoff Cylinder</option>
-          <option value="14kg Solane Sakto">14kg Solane Sakto</option>
+          <option value="1.4kg Solane Sakto">1.4kg Solane Sakto</option>
           <option value="22kg POL Cylinder">22kg POL Cylinder</option>
           <option value="50kg Cylinder">50kg Cylinder</option>
         </select>
@@ -129,5 +134,32 @@
 </div>
 
 <script src="JS/inventory.js"></script>
+
+<script>
+  function printTable() {
+    // Clone the table and remove the Action column
+    var table = document.getElementById('productTable').cloneNode(true);
+    var rows = table.querySelectorAll('tr');
+    
+    rows.forEach(function(row) {
+      var cells = row.querySelectorAll('th, td');
+      if (cells.length > 6) { // Check if there is more than 6 columns
+        row.removeChild(cells[cells.length - 1]); // Remove last cell (Action column)
+      }
+    });
+
+    var printContent = document.getElementById('printableArea').innerHTML;
+    var originalContent = document.body.innerHTML;
+
+    document.body.innerHTML = '<html><head><title>Print Table</title>' +
+      '<style>table { width: 100%; border-collapse: collapse; }' +
+      'th, td { border: 1px solid black; padding: 8px; text-align: left; }' +
+      '</style></head><body>' + printContent + '</body></html>';
+
+    window.print();
+    document.body.innerHTML = originalContent;
+  }
+</script>
+
 </body>
 </html>

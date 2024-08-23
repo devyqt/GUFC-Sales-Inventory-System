@@ -48,17 +48,19 @@ function fetchProducts() {
             data.forEach(product => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td><input type="checkbox" class="product-checkbox" value="${product.Product_ID}"></td>
-                    <td>${product.Product_ID}</td>
+                    <td><input type="checkbox" class="product-checkbox" value="${product.product_id}"></td>
+                    <td>${product.product_id}</td>
                     <td>${product.Product_Name}</td>
                     <td>${product.Product_Price}</td>
                     <td>${product.Product_Date}</td>
-                    <td><button onclick="deleteProduct('${product.Product_ID}')">Delete</button></td>
+                    <td>${product.status}</td>
+                    <td><button onclick="deleteProduct('${product.product_id}')">Delete</button></td>
                 `;
                 tableBody.appendChild(row);
             });
         });
 }
+
 
 function addOrUpdateProduct() {
     const form = document.getElementById('addProductForm');
@@ -78,10 +80,10 @@ function addOrUpdateProduct() {
 }
 
 function deleteProduct(productId) {
-    if (confirm('Are you sure you want to delete this product?')) {
+    if (confirm('Are you sure you want to mark this product as out of stock?')) {
         fetch('db_operations.php', {
-            method: 'DELETE',
-            body: JSON.stringify({ Product_ID: productId })
+            method: 'PATCH', // Use PATCH method to update the product status
+            body: JSON.stringify({ product_id: productId })
         })
         .then(response => response.text())
         .then(message => {
@@ -96,14 +98,14 @@ function deleteSelectedProducts() {
     const productIds = Array.from(checkboxes).map(cb => cb.value);
 
     if (productIds.length === 0) {
-        alert('No products selected for deletion.');
+        alert('No products selected for update.');
         return;
     }
 
-    if (confirm('Are you sure you want to delete the selected products?')) {
+    if (confirm('Are you sure you want to mark the selected products as out of stock?')) {
         fetch('db_operations.php', {
-            method: 'DELETE',
-            body: JSON.stringify({ Product_IDs: productIds })
+            method: 'PATCH', // Use PATCH method to update the product statuses
+            body: JSON.stringify({ product_ids: productIds })
         })
         .then(response => response.text())
         .then(message => {

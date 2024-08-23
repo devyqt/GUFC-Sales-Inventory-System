@@ -351,3 +351,61 @@ html, body {
 .btn-submit:hover {
   background-color: #004d00;
 }
+
+.order-details {
+  display: none;
+}
+.order-row.expandable {
+  cursor: default;
+}
+.expand-icon {
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  background-color: #f4f4f4;
+}
+.product-img {
+  width: 50px;
+  height: 50px;
+}
+.product-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.product-info, .product-price, .product-quantity {
+  margin-left: 10px;
+}
+.order-row td {
+  padding: 10px;
+}
+.expanded .expand-icon {
+  content: '-';
+}
+.btn-delete {
+  color: red;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+/* Responsive table */
+@media (max-width: 768px) {
+  table {
+      font-size: 14px;
+  }
+  .product-item {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+}
