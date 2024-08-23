@@ -8,13 +8,13 @@ $fixedColors = ['#0000FF', '#008000', '#00FFFF', '#800080']; // Blue, Green, Cya
 // SQL query to fetch completed orders with product prices
 $sql = "SELECT 
             p.Product_Name, 
-            COUNT(*) as Total_Sales, 
+            SUM(o.quantity) as Total_Quantity, 
             p.Product_Price,
-            o.order_date as Order_Date
+            DATE(o.order_date) as Order_Date
         FROM order_details o
-        JOIN product_table p ON o.product_id = p.product_id
+        JOIN product_table p ON o.product_id = p.Product_ID
         WHERE o.status = 'completed'
-        GROUP BY p.Product_Name, p.Product_Price";
+        GROUP BY p.Product_Name, p.Product_Price, DATE(o.order_date)";
 $result = $conn->query($sql);
 
 $salesData = [];
@@ -31,15 +31,15 @@ $colorIndex = 0; // Index to cycle through the fixed colors
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Calculate today's sales
-        if (date('Y-m-d', strtotime($row['Order_Date'])) == $today) {
-            $salesToday += ($row['Product_Price'] * $row['Total_Sales']);
+        if ($row['Order_Date'] == $today) {
+            $salesToday += ($row['Product_Price'] * $row['Total_Quantity']);
         }
         
         // Calculate total sales
-        $totalSales += ($row['Product_Price'] * $row['Total_Sales']);
+        $totalSales += ($row['Product_Price'] * $row['Total_Quantity']);
         
         $productNames[] = $row['Product_Name'];
-        $salesCounts[] = $row['Total_Sales'];
+        $salesCounts[] = $row['Total_Quantity'];
         
         // Assign a fixed color to each product
         $colors[] = $fixedColors[$colorIndex % count($fixedColors)];
@@ -58,7 +58,7 @@ $salesData = [
 $totalProducts = 0;
 
 // SQL query to get the total count of distinct products
-$sqlTotalProducts = "SELECT COUNT(DISTINCT product_id) AS total_products FROM product_table";
+$sqlTotalProducts = "SELECT COUNT(DISTINCT Product_ID) AS total_products FROM product_table";
 $resultTotalProducts = $conn->query($sqlTotalProducts);
 
 if ($resultTotalProducts && $resultTotalProducts->num_rows > 0) {
@@ -91,6 +91,7 @@ foreach ($productsToCheck as $productName) {
 // Close the database connection
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
