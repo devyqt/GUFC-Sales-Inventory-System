@@ -61,7 +61,6 @@ function fetchProducts() {
         });
 }
 
-
 function addOrUpdateProduct() {
     const form = document.getElementById('addProductForm');
     const formData = new FormData(form);
@@ -80,16 +79,20 @@ function addOrUpdateProduct() {
 }
 
 function deleteProduct(productId) {
-    if (confirm('Are you sure you want to mark this product as out of stock?')) {
+    if (confirm('Are you sure you want to delete this product?')) {
         fetch('db_operations.php', {
-            method: 'PATCH', // Use PATCH method to update the product status
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({ product_id: productId })
         })
         .then(response => response.text())
         .then(message => {
             alert(message);
             fetchProducts(); // Refresh the product table
-        });
+        })
+        .catch(error => console.error('Error:', error)); // Handle errors
     }
 }
 
@@ -98,20 +101,24 @@ function deleteSelectedProducts() {
     const productIds = Array.from(checkboxes).map(cb => cb.value);
 
     if (productIds.length === 0) {
-        alert('No products selected for update.');
+        alert('No products selected for deletion.');
         return;
     }
 
-    if (confirm('Are you sure you want to mark the selected products as out of stock?')) {
+    if (confirm('Are you sure you want to delete the selected products?')) {
         fetch('db_operations.php', {
-            method: 'PATCH', // Use PATCH method to update the product statuses
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({ product_ids: productIds })
         })
         .then(response => response.text())
         .then(message => {
             alert(message);
             fetchProducts(); // Refresh the product table
-        });
+        })
+        .catch(error => console.error('Error:', error)); // Handle errors
     }
 }
 
