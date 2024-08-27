@@ -14,45 +14,44 @@
 
 <?php include 'navbar.html'; ?>
 
+<!-- Admin Profile Component Start -->
+<div class="admin-profile">
+    <div class="profile-info">
+        <div class="profile-name">Solane Admin</div>
+        <div class="profile-role">Admin Profile</div>
+    </div>
+    <div class="profile-image">
+        <img src="images/admin logo.png" alt="Profile Avatar"> <!-- Replace with the path to your image -->
+    </div>
+    <div class="settings-icon">
+        <img src="images/settings.png" alt="Settings"> <!-- Replace with the path to your settings icon -->
+    </div>
+  </div>
+  <!-- Admin Profile Component End -->
+
 <div class="container">
   <section class="main">
     <div class="tab-container">
       <!-- Category Tabs -->
       <ul class="tabs">
-        <li><a href="#cylinders" class="tab-link active">Cylinders</a></li>
+        <li><a href="#cylinders" class="tab-link active">Products</a></li>
         <li><a href="#other-products" class="tab-link">Other Products</a></li>
       </ul>
+      <div class="metrics">
+        <div class="ElevenKG"><span>11kg Auto-Shutoff Cylinder</span><p id="totalProducts">200</p></div>
+        <div class="Eleven-POL-KG"><span>11kg POL Cylinder</span><p id="totalProducts">370</p></div>
+        <div class="Eleven-point-fourKG"><span>1.4kg Solane Sakto</span><p id="salesToday">250</p></div>
+        <div class="Twenty-twoKG"><span>22kg POL Cylinder</span><p id="totalSales"></p>89</div>
+        <div class="FifthyKG"><span>50kg Cylinder</span><p id="totalSales"></p>67</div>
+        <div class="POLRegulator"><span>POL Regulator</span><p id="totalSales">324</p></div>
+        <div class="ASRegulator"><span>AS Regulator</span><p id="totalSales"></p>180</div>
+        <div class="HoseClamps"><span>Hose with Clamps</span><p id="totalSales">60</p></div>
 
-      <!-- Tab Content -->
-      <div class="tab-content">
-        <!-- Cylinders Tab -->
-        <div id="cylinders" class="tab-pane active">
-          <div class="product-container">
-            <div class="box">
-              <img src="images/11kg.jpg" alt="Product 1" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
-              <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
-              <p><strong>Description:</strong> High quality cylinder.</p>
-            </div>
-            <div class="box">
-              <img src="images/14kg.jpg" alt="Product 2" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
-              <p><strong>Product Name:</strong> 1.4kg Solane Sakto</p>
-              <p><strong>Description:</strong> Durable and reliable.</p>
-            </div>
-            <div class="box">
-              <img src="images/22kg.jpg" alt="Product 3" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
-              <p><strong>Product Name:</strong> 22kg POL Cylinder</p>
-              <p><strong>Description:</strong> High quality cylinder.</p>
-            </div>
-            <div class="box">
-              <img src="images/50kg.jpg" alt="Product 4" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
-              <p><strong>Product Name:</strong> 50kg Cylinder</p>
-              <p><strong>Description:</strong> Durable and reliable.</p>
-            </div>
-          </div>
-          <!-- Add Product Button for Cylinders -->
-          <button class="add-product-button" onclick="openModal()">Add Cylinder</button>
+         <!-- Add Product Button for Cylinders -->
+        <button class="add-product-button" onclick="openModal()">Add Cylinder</button>
         </div>
 
+      
         <!-- Other Products Tab -->
         <div id="other-products" class="tab-pane">
           <div class="product-container">
@@ -73,6 +72,83 @@
       </div>
     </div>
 
+    <!-- Sort Button -->
+    <button class="sort-button" onclick="openSortModal()">
+            <img src="images/Sorting.png" alt="Sort" class="sort-icon"> Sort
+        </button>
+
+        <!-- Sort Modal -->
+        <div id="sortModal" class="sort-modal" role="dialog" aria-labelledby="sortTitle" aria-modal="true">
+            <div class="sort-modal-content">
+                <!-- Close button -->
+                <button class="close-button" onclick="closeSortModal()" aria-label="Close Modal">&times;</button>
+                <h2 class="sort-modal-title" id="sortTitle">Sort</h2>
+                
+                <!-- Sort options and content -->
+                <div class="sort-section">
+                    <label>Product No.</label>
+                    <div class="sort-options">
+                        <label>
+                            <input type="radio" name="productNumber" value="0-9">
+                            0-9
+                        </label>
+                        <label>
+                            <input type="radio" name="productNumber" value="9-0">
+                            9-0
+                        </label>
+                    </div>
+                </div>
+
+                <div class="sort-section">
+                    <label>Date</label>
+                    <div class="sort-options">
+                        <label>
+                            <input type="radio" name="dateOrder" value="ascending">
+                            Ascending
+                        </label>
+                        <label>
+                            <input type="radio" name="dateOrder" value="descending">
+                            Descending
+                        </label>
+                    </div>
+                </div>
+
+                <div class="sort-section">
+                    <label>Date Range</label>
+                    <div class="date-range">
+                        <input type="date" id="startDate" name="startDate">
+                        <span>To</span>
+                        <input type="date" id="endDate" name="endDate">
+                    </div>
+                </div>
+
+                <div class="sort-actions">
+                    <button type="button" class="btn-reset">Reset</button>
+                    <button type="submit" class="btn-apply">Apply Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript to handle modal -->
+        <script>
+            function openSortModal() {
+                document.getElementById("sortModal").style.display = "block";
+            }
+
+            function closeSortModal() {
+                document.getElementById("sortModal").style.display = "none";
+            }
+
+            // Close the modal if user clicks outside the modal content
+            window.onclick = function(event) {
+                var modal = document.getElementById("sortModal");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+
 
     
     <button id="deleteSelected" class="btn-delete">Delete Selected</button>
@@ -86,7 +162,7 @@
                     <th>Select</th>
                     <th>Product ID</th>
                     <th>Product Name</th>
-                    <th>Price</th>
+                    <th>Quantity</th>
                     <th>Date</th>
                     <th>Status</th>
                     <th>Action</th>
