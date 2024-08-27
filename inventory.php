@@ -29,50 +29,77 @@
   </div>
   <!-- Admin Profile Component End -->
 
-<div class="container">
+ <div class="container">
   <section class="main">
     <div class="tab-container">
+
       <!-- Category Tabs -->
       <ul class="tabs">
         <li><a href="#cylinders" class="tab-link active">Products</a></li>
         <li><a href="#other-products" class="tab-link">Other Products</a></li>
       </ul>
-      <div class="metrics">
-        <div class="ElevenKG"><span>11kg Auto-Shutoff Cylinder</span><p id="totalProducts">200</p></div>
-        <div class="Eleven-POL-KG"><span>11kg POL Cylinder</span><p id="totalProducts">370</p></div>
-        <div class="Eleven-point-fourKG"><span>1.4kg Solane Sakto</span><p id="salesToday">250</p></div>
-        <div class="Twenty-twoKG"><span>22kg POL Cylinder</span><p id="totalSales"></p>89</div>
-        <div class="FifthyKG"><span>50kg Cylinder</span><p id="totalSales"></p>67</div>
-        <div class="POLRegulator"><span>POL Regulator</span><p id="totalSales">324</p></div>
-        <div class="ASRegulator"><span>AS Regulator</span><p id="totalSales"></p>180</div>
-        <div class="HoseClamps"><span>Hose with Clamps</span><p id="totalSales">60</p></div>
 
-         <!-- Add Product Button for Cylinders -->
-        <button class="add-product-button" onclick="openModal()">Add Cylinder</button>
+      <!-- Products Tab -->
+      <div class="metrics" id="cylinders">
+        <div class="ElevenKG">
+          <span>11kg Auto-Shutoff Cylinder</span>
+          <p id="first-total">200</p>
         </div>
+        <div class="Eleven-POL-KG">
+          <span>11kg POL Cylinder</span>
+          <p id="second-total">370</p>
+        </div>
+        <div class="Eleven-point-fourKG">
+          <span>1.4kg Solane Sakto</span>
+          <p id="third-total">250</p>
+        </div>
+        <div class="Twenty-twoKG">
+          <span>22kg POL Cylinder</span>
+          <p id="fourth-total">89</p>
+        </div>
+        <div class="FifthyKG">
+          <span>50kg Cylinder</span>
+          <p id="fifth-total">67</p>
+        </div>
+        <div class="POLRegulator">
+          <span>POL Regulator</span>
+          <p id="sixth-total">324</p>
+        </div>
+        <div class="ASRegulator">
+          <span>AS Regulator</span>
+          <p id="seventh-total">180</p>
+        </div>
+        <div class="HoseClamps">
+          <span>Hose with Clamps</span>
+          <p id="eight-total">60</p>
+        </div>
+      </div>
 
-      
-        <!-- Other Products Tab -->
-        <div id="other-products" class="tab-pane">
-          <div class="product-container">
-            <div class="box">
-              <img src="images/product3.jpg" alt="Product 3" class="product-img">
-              <p><strong>Product Name:</strong> Accessory A</p>
-              <p><strong>Description:</strong> Essential accessory.</p>
-            </div>
-            <div class="box">
-              <img src="images/product4.jpg" alt="Product 4" class="product-img">
-              <p><strong>Product Name:</strong> Accessory B</p>
-              <p><strong>Description:</strong> High-quality material.</p>
-            </div>
+      <!-- Other Products Tab -->
+      <div id="other-products" class="tab-pane">
+        <div class="product-container">
+          <div class="Other-Product1">
+            <span>11kg Auto-Shutoff Cylinder</span>
+            <p id="first-total">200</p>
           </div>
+          <div class="Other-Product2">
+            <span>11kg Auto-Shutoff Cylinder</span>
+            <p id="first-total">200</p>
+          </div>
+
           <!-- Add Product Button for Other Products -->
           <button class="add-product-button" onclick="openModal()">Add Accessory</button>
         </div>
       </div>
     </div>
+  </section>
+</div>
 
-    <!-- Sort Button -->
+
+        <!-- Add Product Button for Cylinders -->
+        <button class="add-product-button" onclick="openModal()">Add Cylinder</button>
+        
+        <!-- Sort Button -->
     <button class="sort-button" onclick="openSortModal()">
             <img src="images/Sorting.png" alt="Sort" class="sort-icon"> Sort
         </button>

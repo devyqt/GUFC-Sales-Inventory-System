@@ -8,24 +8,29 @@ document.addEventListener('DOMContentLoaded', () => {
         addOrUpdateProduct();
     });
 
-    // Handle tab switching
-    const tabs = document.querySelectorAll('.tab-link');
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    tabs.forEach(tab => {
-        tab.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Remove active class from all tabs and tab panes
-            tabs.forEach(t => t.classList.remove('active'));
-            tabPanes.forEach(pane => pane.classList.remove('active'));
+  // Handle tab switching
+const tabs = document.querySelectorAll('.tab-link');
+const tabPanes = document.querySelectorAll('.tab-pane');
 
-            // Add active class to the clicked tab and corresponding pane
-            tab.classList.add('active');
-            const targetPane = document.querySelector(tab.getAttribute('href'));
-            if (targetPane) {
-                targetPane.classList.add('active');
-            }
-        });
+tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Remove active class from all tabs and tab panes
+        tabs.forEach(t => t.classList.remove('active'));
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+
+        // Add active class to the clicked tab and corresponding pane
+        tab.classList.add('active');
+        const targetPane = document.querySelector(tab.getAttribute('href'));
+        if (targetPane) {
+            targetPane.classList.add('active');
+        }
     });
+});
+
+
+
 
     // Handle delete button clicks
     document.getElementById('deleteSelected').addEventListener('click', deleteSelectedProducts);
