@@ -192,33 +192,40 @@
     <button onclick="printTable()" class="btn-print no-print">Print Table</button>
    
    
-    <!-- Product Table -->
-    <div class="product-table" id="printableArea">  
-        <table id="productTable" class="print-table">
-            <thead>
-                <tr>
-                    <th>Select</th>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Product rows will be populated here by JavaScript -->
-            </tbody>
-        </table>
-    </div>
-  </section>
-</div>
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Date Added</th>
+          <th>Expiration Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be populated here by JavaScript -->
+      </tbody>
+    </table>
+
+    <!-- Expanded rows for serial numbers -->
+    <table id="serialTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>Serial Number</th>
+        </tr>
+      </thead>
+      <tbody id="serialTableBody">
+        <!-- Serial numbers will be populated here by JavaScript -->
+      </tbody>
+    </table>
+
 
 <!-- Modal HTML -->
 <div id="productModal" class="modal">
   <div class="modal-content">
     <span class="close-button" onclick="closeModal()">&times;</span>
-    <!-- Add the serial number camera icon -->
     <span class="camera-icon" title="Serial Number Camera">
       <img src="images/serialCam.jpg" alt="Camera Icon">
     </span>
@@ -230,13 +237,11 @@
       </div>
       <div class="form-group">
         <label for="productName">Product Name:</label>
-        <select id="productName" name="productName" class="form-control" required>
-          <option value="">Select Cylinder</option>
-          <option value="11kg Auto-Shutoff Cylinder">11kg Auto-Shutoff Cylinder</option>
-          <option value="1.4kg Solane Sakto">1.4kg Solane Sakto</option>
-          <option value="22kg POL Cylinder">22kg POL Cylinder</option>
-          <option value="50kg Cylinder">50kg Cylinder</option>
-        </select>
+        <input type="text" id="productName" name="productName" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="productQuantity">Quantity:</label> 
+        <input type="number" id="productQuantity" name="productQuantity" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="productPrice">Product Price:</label> 
@@ -246,10 +251,22 @@
         <label for="productDate">Date:</label>
         <input type="date" id="productDate" name="productDate" class="form-control" required>
       </div>
+      <div class="form-group">
+        <label for="expirationDate">Expiration Date:</label>
+        <input type="date" id="expirationDate" name="expirationDate" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="serialNumbers">Serial Numbers (one per line):</label>
+        <textarea id="serialNumbers" name="serialNumbers" class="form-control" placeholder="Enter serial numbers, one per line" rows="4"></textarea>
+        <div id="serialError" style="color: red; display: none;">The number of serial numbers exceeds the quantity.</div>
+      </div>
       <button type="submit" class="btn-submit">Submit</button>
     </form>
   </div>
 </div>
+
+
+
 
 
 <script src="JS/inventory.js"></script>
