@@ -44,35 +44,57 @@ body {
     overflow: auto;
     
 }
-
-/* Customer Table */
-.table-hover tbody tr:hover {
-    background-color: #c4c8d1;
+/* Modal styles */
+.modal {
+    display: fixed;
+    justify-content: center;
+    width: 100%; /* Set the width of the modal */
+    height: 100%;
+    z-index: 500;
+    padding-top: 60px;
 }
 
-.table thead th {
-    background-color: #2a3f54;
-    color: #fff;
-    border-bottom: none;
-    padding: 15px 10px;
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* Center the content vertically */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 25%; /* Ensure the content fits within the modal container */
+    height: 70%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Add a subtle shadow for depth */
+}
+
+.close {    
+    color: #aaa;
+    float: right;
+    font-size: 28px;
     font-weight: bold;
-    text-align: left;
 }
 
-.table tbody td {
-    padding: 15px 10px;
-    color: #333;
-    vertical-align: middle;
-    text-align: left;
-    border-bottom: 1px solid #e3e8f3;
+.close:hover,   
+.close:focus {
+
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.table tbody tr td img.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
+.modal-header, .modal-body, .modal-footer {
+    padding: 10px;
 }
+
+/* Adjust form fields to fit nicely within the modal */
+.modal-body .form-control {
+    width: 100%; /* Make sure input fields take up the full width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0px;
+
+    
+}
+
 
 /* Buttons */
 .btn-primary {
@@ -81,6 +103,7 @@ body {
     color: #fff;
     border-radius: 5px;
     padding: 10px 20px;
+    
 }
 
 .btn-primary:hover {
@@ -112,6 +135,8 @@ body {
 }
 
 .modal-footer {
+    display: flex;
+    justify-content: center;
     border-top: none;
     padding-top: 10px;
 }
@@ -137,6 +162,36 @@ body {
 .btn-set-task:hover {
     background-color: #1a6fa9;
     border-color: #1a6fa9;
+}
+
+
+/* Customer Table */
+.table-hover tbody tr:hover {
+    background-color: #c4c8d1;
+}
+
+.table thead th {
+    background-color: #2a3f54;
+    color: #fff;
+    border-bottom: none;
+    padding: 15px 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.table tbody td {
+    padding: 15px 10px;
+    color: #333;
+    vertical-align: middle;
+    text-align: left;
+    border-bottom: 1px solid #e3e8f3;
+}
+
+.table tbody tr td img.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 /* Adjust margin for table container */
