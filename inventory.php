@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   
 </head>
-<body>
+<div>
 
 <?php include 'navbar.html'; ?>
 
@@ -29,81 +29,92 @@
   </div>
   <!-- Admin Profile Component End -->
 
- <div class="container">
+  <div class="container">
   <section class="main">
-    <div class="tab-container">
+    <div class="inventory-tab-container">
 
       <!-- Category Tabs -->
       <ul class="tabs">
         <li><a href="#cylinders" class="tab-link active">Products</a></li>
         <li><a href="#other-products" class="tab-link">Other Products</a></li>
       </ul>
-
       <!-- Products Tab -->
-      <div class="metrics" id="cylinders">
-        <div class="ElevenKG">
-          <span>11kg Auto-Shutoff Cylinder</span>
-          <p id="first-total">200</p>
+      <div id="cylinders" class="tab-pane active">
+          <div class="inventory-container">
+            <div class="Invbox">
+              <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
+              <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
+            </div>
+            <div class="Invbox">
+              <p><strong>Product Name:</strong> 11kg POL Cylinder</p>
+              <p><strong>Quantity:</strong> <span id="second-total">370</span></p>
+            </div>
+            <div class="Invbox">
+              <p><strong>Product Name:</strong> 1.4kg Solane Sakto</p>
+              <p><strong>Quantity:</strong> <span id="third-total">250</span></p>
+            </div>
+            <div class="Invbox">
+              <p><strong>Product Name:</strong> 22kg POL Cylinder</p>
+              <p><strong>Quantity:</strong> <span id="fourth-total">89</span></p>
+            </div>
+            <div class="Invbox">
+              <p><strong>Product Name:</strong> 50kg Cylinder</p>
+              <p><strong>Quantity:</strong> <span id="fifth-total">67</span></p>
+            </div>
+            <div class="Invbox">
+              <p><strong>Product Name:</strong> POL Regulator</p>
+              <p><strong>Quantity:</strong> <span id="sixth-total">324</span></p>
+            </div>
+            <div class="Invbox">
+              <p><strong>Product Name:</strong> AS Regulator</p>
+              <p><strong>Quantity:</strong> <span id="seventh-total">180</span></p>
+            </div>
+            <div class="Invbox">
+              <p><strong>Product Name:</strong> Hose with Clamps</p>
+              <p><strong>Quantity:</strong> <span id="eight-total">60</span></p>
+            </div>
+          </div>
+                <!-- Add Product Button for Cylinders -->
+        <button class="add-product-button" onclick="openModal()">Add Cylinder</button>
+        
         </div>
-        <div class="Eleven-POL-KG">
-          <span>11kg POL Cylinder</span>
-          <p id="second-total">370</p>
-        </div>
-        <div class="Eleven-point-fourKG">
-          <span>1.4kg Solane Sakto</span>
-          <p id="third-total">250</p>
-        </div>
-        <div class="Twenty-twoKG">
-          <span>22kg POL Cylinder</span>
-          <p id="fourth-total">89</p>
-        </div>
-        <div class="FifthyKG">
-          <span>50kg Cylinder</span>
-          <p id="fifth-total">67</p>
-        </div>
-        <div class="POLRegulator">
-          <span>POL Regulator</span>
-          <p id="sixth-total">324</p>
-        </div>
-        <div class="ASRegulator">
-          <span>AS Regulator</span>
-          <p id="seventh-total">180</p>
-        </div>
-        <div class="HoseClamps">
-          <span>Hose with Clamps</span>
-          <p id="eight-total">60</p>
-        </div>
-      </div>
 
       <!-- Other Products Tab -->
       <div id="other-products" class="tab-pane">
-        <div class="product-container">
-          <div class="Other-Product1">
-            <span>11kg Auto-Shutoff Cylinder</span>
-            <p id="first-total">200</p>
+        <div class="other-container">
+          <div class="Other-item">
+            <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
+            <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
           </div>
-          <div class="Other-Product2">
-            <span>11kg Auto-Shutoff Cylinder</span>
-            <p id="first-total">200</p>
+          <div class="Other-item">
+            <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
+            <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
           </div>
-
-          <!-- Add Product Button for Other Products -->
-          <button class="add-product-button" onclick="openModal()">Add Accessory</button>
-        </div>
-      </div>
+          <div class="Other-item">
+            <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
+            <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
+          </div>
+          <div class="Other-item">
+            <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
+            <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
+          </div>
+       <!-- Add Product Button for Other Products -->
+       <button class="add-accessory-button" onclick="openModal()">Add Accessory</button>
     </div>
   </section>
 </div>
 
-
-        <!-- Add Product Button for Cylinders -->
-        <button class="add-product-button" onclick="openModal()">Add Cylinder</button>
-        
+    </div>
+  </section>
+ 
+  
         <!-- Sort Button -->
+        </div>
     <button class="sort-button" onclick="openSortModal()">
             <img src="images/Sorting.png" alt="Sort" class="sort-icon"> Sort
         </button>
-
+        </div>
+</div>
         <!-- Sort Modal -->
         <div id="sortModal" class="sort-modal" role="dialog" aria-labelledby="sortTitle" aria-modal="true">
             <div class="sort-modal-content">
@@ -177,12 +188,12 @@
 
 
 
-    
     <button id="deleteSelected" class="btn-delete">Delete Selected</button>
     <button onclick="printTable()" class="btn-print no-print">Print Table</button>
+   
+   
     <!-- Product Table -->
-    <div class="product-table" id="printableArea">
-        
+    <div class="product-table" id="printableArea">  
         <table id="productTable" class="print-table">
             <thead>
                 <tr>
@@ -207,6 +218,10 @@
 <div id="productModal" class="modal">
   <div class="modal-content">
     <span class="close-button" onclick="closeModal()">&times;</span>
+    <!-- Add the serial number camera icon -->
+    <span class="camera-icon" title="Serial Number Camera">
+      <img src="images/serialCam.jpg" alt="Camera Icon">
+    </span>
     <h3>Add Product</h3>
     <form id="addProductForm">
       <div class="form-group">
@@ -224,7 +239,7 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="productPrice">Product Price</label> 
+        <label for="productPrice">Product Price:</label> 
         <input type="text" id="productPrice" name="productPrice" class="form-control" required>
       </div>
       <div class="form-group">
@@ -235,6 +250,7 @@
     </form>
   </div>
 </div>
+
 
 <script src="JS/inventory.js"></script>
 

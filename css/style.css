@@ -240,10 +240,6 @@ input[type="submit"]:hover {
 
 /* Tab Content Styles */
 .tab-content {
-  padding: 20px;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 0 0 5px 5px;
   width: 100%;
 }
 

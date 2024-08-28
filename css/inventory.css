@@ -74,11 +74,13 @@ html, body {
 }
 
 /* Tab Container Styles */
-.tab-container {
+.inventory-tab-container {
+  
   width: 100%; /* Full width of the container */
   box-sizing: border-box; /* Includes padding and border in the element's total width */
   padding: 0 20px; /* Adjust padding to fit within main content area */
   margin-left: 0; /* Remove left margin to align with main content */
+  ;
   
 }
 
@@ -121,39 +123,29 @@ html, body {
   background: #bbb;
 }
 
-/* PRODUCTS LIST */
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin: 30px 0 20px 20px;
-  width: 1178px;
-}
+/*Product Inventory Box*/
 
-.metrics div {
-  background: #a4c3a2;
-  border-radius: 5px;
-  padding: 15px;
+/* Box Styles */
+.Invbox {
+  width: 23%;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(235, 233, 233);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-  height: 70px;
+}
+
+.Invbox img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.Invbox p {
   font-size: 12px;
-  transition: transform 0.3s, box-shadow 0.3s;
-
-
-}
-
-.metric span {
-  display: block;
-  color: #000;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.metric p {
-  font-size: 24px;
-  color: #333;
-  margin: 0;
+  margin-top: 5px;
 }
 
 /* Tab Styles */
@@ -182,31 +174,55 @@ html, body {
   background-color: #c8cac8;
 }
 
-/* Other Products Section */
-.tab-pane {
-  display: none;
-}
 
-.tab-pane.active {
-  display: block;
-}
-
-.product-container {
+.inventory-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  margin-top: 20px;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  
 }
 
-.product-container div {
-  background: #d9e4d6;
-  border-radius: 5px;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 70px;
-  font-size: 12px;
-  flex: 1 1 calc(50% - 20px);
+.other-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+
 }
+.other-container div {
+  width: 23%;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(235, 233, 233);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  text-align: center;
+}
+.Other-item {
+  width: 23%;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(235, 233, 233);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.Other-item p {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
 
 
 /* Style the Sort Button */
@@ -224,7 +240,7 @@ html, body {
   margin-left: auto;  /* Aligns the button to the right */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   margin-top: 10px;
-  margin-right: 19px;
+  margin-right: 24px;
   margin-bottom: -25px;
 }
 
@@ -379,17 +395,30 @@ html, body {
 /* Add Product Button */
 .add-product-button {
     padding: 6px 15px;
-    background-color: #02df2777;
-    color: black;
+    background-color: #08a50277;
+    color: rgb(255, 255, 255);
     border-radius: 5px;
     cursor: pointer;
     display: block; /* or inline-block */
     text-align: center; /* Ensure text is centered within the button */
-    margin-top: 10px;
-    margin-bottom: -43px;
-    margin-right: 105px;
+
     
     
+}
+
+.add-accessory-button {
+  padding: 6px 15px;
+  background-color: #08a50277;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  cursor: pointer;
+  display: block; /* or inline-block */
+  text-align: center; /* Ensure text is centered within the button */
+  
+}
+
+.add-accessory-button:hover {
+  background-color: rgb(84, 84, 228);
 }
 
 
@@ -418,7 +447,7 @@ html, body {
 }
 
 #productTable th {
-  background-color:   #b5b5f5;
+  background-color:   #9797d1;
 }
 
 /* Responsive Design - Adjustments for smaller screens */
@@ -443,4 +472,19 @@ html, body {
   .box {
     width: calc(100% - 20px); /* Adjust width to fit 1 item per row on very small screens */
   }
+}
+
+
+.camera-icon {
+  position: absolute;
+  top: 35%;
+  right: 13%;
+  translate: 
+  transform (-35%, -13%);
+}
+
+.camera-icon img {
+  width: 130px; /* Adjust the size as needed */
+  height: auto;
+  cursor: pointer;
 }

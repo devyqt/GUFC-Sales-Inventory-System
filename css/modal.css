@@ -64,6 +64,7 @@
   width: 100%; /* Full width for form groups */
   display: flex;
   flex-direction: column;
+  margin-left: 15px;
 }
 
 .form-group label {
@@ -75,7 +76,7 @@
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%; /* Ensure input fields fill container width */
+  width: 50%; /* Ensure input fields fill container width */
 }
 
 /* Submit Button Styles */
@@ -86,7 +87,8 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 100%; /* Full width button */
+  width: 20%; /* Full width button */
+  margin-left: 230px;
   margin-top: 10px;
 }
 
