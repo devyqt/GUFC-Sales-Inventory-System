@@ -75,9 +75,21 @@ function populateProductTable(products) {
     });
 }
 
+function openSortModal() {
+    document.getElementById("sortModal").style.display = "block";
+}
 
+function closeSortModal() {
+    document.getElementById("sortModal").style.display = "none";
+}
 
-
+// Close the modal if user clicks outside the modal content
+window.onclick = function(event) {
+    var modal = document.getElementById("sortModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
 function toggleProductOptions() {
     const productType = document.getElementById('productType').value;
@@ -89,6 +101,7 @@ function toggleProductOptions() {
 
     if (productType === 'cylinder') {
         const cylinderOptions = [
+            '',
             '11kg Auto-Shutoff Cylinder',
             '11kg POL Cylinder',
             '50kg Cylinder',
@@ -104,6 +117,7 @@ function toggleProductOptions() {
         });
     } else if (productType === 'non-cylinder') {
         const nonCylinderOptions = [
+            '',
             'Hose with Clamps',
             'AS Regulator',
             'POL Regulator'
@@ -302,6 +316,70 @@ function deleteSelectedProducts() {
         .catch(error => console.error('Error:', error));
     }
 }
+
+function applyFilters() {
+    const serialNum = document.getElementById('serialNum').value.toLowerCase();
+    const dateOrder = document.querySelector('input[name="dateOrder"]:checked')?.value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+
+    const table = document.getElementById('productTable');
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
+
+    console.log('Serial Number Filter:', serialNum);
+    console.log('Date Order:', dateOrder);
+    console.log('Start Date:', startDate);
+    console.log('End Date:', endDate);
+
+    // Filter rows
+    const filteredRows = rows.filter(row => {
+        const serialNumber = row.cells[6].textContent.toLowerCase();
+        const productDate = row.cells[3].textContent;
+
+        console.log('Row Serial Number:', serialNumber);
+        console.log('Row Product Date:', productDate);
+
+        let showRow = true;
+
+        if (serialNum && !serialNumber.includes(serialNum)) {
+            showRow = false;
+        }
+
+        if (startDate && endDate) {
+            const productDateObj = new Date(productDate);
+            const startDateObj = new Date(startDate);
+            const endDateObj = new Date(endDate);
+
+            if (productDateObj < startDateObj || productDateObj > endDateObj) {
+                showRow = false;
+            }
+        }
+
+        return showRow;
+    });
+
+    console.log('Filtered Rows:', filteredRows);
+
+    // Sort rows by date
+    if (dateOrder) {
+        filteredRows.sort((a, b) => {
+            const dateA = new Date(a.cells[3].textContent);
+            const dateB = new Date(b.cells[3].textContent);
+            return dateOrder === 'ascending' ? dateA - dateB : dateB - dateA;
+        });
+    }
+
+    console.log('Sorted Rows:', filteredRows);
+
+    // Update table with filtered and sorted rows
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = '';
+    filteredRows.forEach(row => tbody.appendChild(row));
+
+    closeSortModal();
+}
+
+
 
 
 function closeModal() {

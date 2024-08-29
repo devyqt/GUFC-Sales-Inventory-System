@@ -48,35 +48,35 @@
           <div class="inventory-container">
             <div class="Invbox">
               <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
-              <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
+              <p><strong>Quantity:</strong> <span id="first-total">0</span></p>
             </div>
             <div class="Invbox">
               <p><strong>Product Name:</strong> 11kg POL Cylinder</p>
-              <p><strong>Quantity:</strong> <span id="second-total">370</span></p>
+              <p><strong>Quantity:</strong> <span id="second-total">0</span></p>
             </div>
             <div class="Invbox">
               <p><strong>Product Name:</strong> 1.4kg Solane Sakto</p>
-              <p><strong>Quantity:</strong> <span id="third-total">250</span></p>
+              <p><strong>Quantity:</strong> <span id="third-total">0</span></p>
             </div>
             <div class="Invbox">
               <p><strong>Product Name:</strong> 22kg POL Cylinder</p>
-              <p><strong>Quantity:</strong> <span id="fourth-total">89</span></p>
+              <p><strong>Quantity:</strong> <span id="fourth-total">0</span></p>
             </div>
             <div class="Invbox">
               <p><strong>Product Name:</strong> 50kg Cylinder</p>
-              <p><strong>Quantity:</strong> <span id="fifth-total">67</span></p>
+              <p><strong>Quantity:</strong> <span id="fifth-total">0</span></p>
             </div>
             <div class="Invbox">
               <p><strong>Product Name:</strong> POL Regulator</p>
-              <p><strong>Quantity:</strong> <span id="sixth-total">324</span></p>
+              <p><strong>Quantity:</strong> <span id="sixth-total">0</span></p>
             </div>
             <div class="Invbox">
               <p><strong>Product Name:</strong> AS Regulator</p>
-              <p><strong>Quantity:</strong> <span id="seventh-total">180</span></p>
+              <p><strong>Quantity:</strong> <span id="seventh-total">0</span></p>
             </div>
             <div class="Invbox">
               <p><strong>Product Name:</strong> Hose with Clamps</p>
-              <p><strong>Quantity:</strong> <span id="eight-total">60</span></p>
+              <p><strong>Quantity:</strong> <span id="eight-total">0</span></p>
             </div>
           </div>
                 <!-- Add Product Button for Cylinders -->
@@ -88,19 +88,19 @@
         <div class="other-container">
           <div class="Other-item">
             <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
-            <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
+            <p><strong>Quantity:</strong> <span id="first-total">0</span></p>
           </div>
           <div class="Other-item">
             <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
-            <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
+            <p><strong>Quantity:</strong> <span id="first-total">0</span></p>
           </div>
           <div class="Other-item">
             <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
-            <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
+            <p><strong>Quantity:</strong> <span id="first-total">0</span></p>
           </div>
           <div class="Other-item">
             <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
-            <p><strong>Quantity:</strong> <span id="first-total">200</span></p>
+            <p><strong>Quantity:</strong> <span id="first-total">0</span></p>
           </div>
        <!-- Add Product Button for Other Products -->
        <button class="add-accessory-button" onclick="openModal()">Add Accessory</button>
@@ -110,94 +110,84 @@
 
     </div>
   </section>
- 
-  
+ </div>
         <!-- Sort Button -->
+<button class="sort-button" onclick="openSortModal()">
+    <img src="images/Sorting.png" alt="Sort" class="sort-icon"> Sort
+</button>
+
+<!-- Sort Modal -->
+<div id="sortModal" class="sort-modal" role="dialog" aria-labelledby="sortTitle" aria-modal="true">
+    <div class="sort-modal-content">
+        <!-- Close button -->
+        <button class="close-button" onclick="closeSortModal()" aria-label="Close Modal">&times;</button>
+        <h2 class="sort-modal-title" id="sortTitle">Sort</h2>
+        
+        <!-- Sort options and content -->
+        <div class="sort-section">
+            <label>Serial Number</label>
+            <input type="text" id="serialNum" name="serialNum">
         </div>
-    <button class="sort-button" onclick="openSortModal()">
-            <img src="images/Sorting.png" alt="Sort" class="sort-icon"> Sort
-        </button>
-        </div>
-</div>
-        <!-- Sort Modal -->
-        <div id="sortModal" class="sort-modal" role="dialog" aria-labelledby="sortTitle" aria-modal="true">
-            <div class="sort-modal-content">
-                <!-- Close button -->
-                <button class="close-button" onclick="closeSortModal()" aria-label="Close Modal">&times;</button>
-                <h2 class="sort-modal-title" id="sortTitle">Sort</h2>
-                
-                <!-- Sort options and content -->
-                <div class="sort-section">
-                    <label>Product No.</label>
-                    <div class="sort-options">
-                        <label>
-                            <input type="radio" name="productNumber" value="0-9">
-                            0-9
-                        </label>
-                        <label>
-                            <input type="radio" name="productNumber" value="9-0">
-                            9-0
-                        </label>
-                    </div>
-                </div>
 
-                <div class="sort-section">
-                    <label>Date</label>
-                    <div class="sort-options">
-                        <label>
-                            <input type="radio" name="dateOrder" value="ascending">
-                            Ascending
-                        </label>
-                        <label>
-                            <input type="radio" name="dateOrder" value="descending">
-                            Descending
-                        </label>
-                    </div>
-                </div>
-
-                <div class="sort-section">
-                    <label>Date Range</label>
-                    <div class="date-range">
-                        <input type="date" id="startDate" name="startDate">
-                        <span>To</span>
-                        <input type="date" id="endDate" name="endDate">
-                    </div>
-                </div>
-
-                <div class="sort-actions">
-                    <button type="button" class="btn-reset">Reset</button>
-                    <button type="submit" class="btn-apply">Apply Now</button>
-                </div>
+        <div class="sort-section">
+            <label>Date</label>
+            <div class="sort-options">
+                <label>
+                    <input type="radio" name="dateOrder" value="ascending">
+                    Ascending
+                </label>
+                <label>
+                    <input type="radio" name="dateOrder" value="descending">
+                    Descending
+                </label>
             </div>
         </div>
+
+        <div class="sort-section">
+            <label>Date Range</label>
+            <div class="date-range">
+                <input type="date" id="startDate" name="startDate">
+                <span>To</span>
+                <input type="date" id="endDate" name="endDate">
+            </div>
+        </div>
+
+        <div class="sort-actions">
+            <button type="button" class="btn-reset" onclick="resetFilters()">Reset</button>
+            <button type="button" class="btn-apply" onclick="applyFilters()">Apply Now</button>
+        </div>
+    </div>
+</div>
+
+
 
     <button id="deleteSelected" class="btn-delete">Delete Selected</button>
     <button onclick="printTable()" class="btn-print no-print">Print Table</button>
    
    
     <table id="productTable">
-    <thead>
-        <tr>
-            <th>Select</th>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Product Date</th>
-            <th>Expiration Date</th>
-            <th>Status</th>
-            <th>Serial Number</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Rows will be dynamically inserted here -->
-    </tbody>
-</table>
+      <thead>
+          <tr>
+              <th>Select</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Product Date</th>
+              <th>Expiration Date</th>
+              <th>Status</th>
+              <th>Serial Number</th>
+              <th>Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Rows will be dynamically inserted here -->
+      </tbody>
+    </table>
 
 <!-- Modal HTML -->
 <div id="productModal" class="modal">
   <div class="modal-content">
     <span class="close-button" onclick="closeModal()">&times;</span>
-    <span class="camera-icon" title="Serial Number Camera">
+    <span class="camera-icon" title="Serial Number Camera" onclick="startCamera()">
       <img src="images/serialCam.jpg" alt="Camera Icon">
     </span>
     <h3>Add Product</h3>
@@ -247,32 +237,19 @@
       </div>
       <button type="submit" class="btn-submit">Submit</button>
     </form>
+    <div id="cameraOverlay" style="display: none;">
+      <video id="video" width="300" height="200" autoplay></video>
+    </div>
   </div>
 </div>
 
 
 
-
-
 <script src="JS/inventory.js"></script>
 <script src="JS/settings.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
+
 <script>
- function openSortModal() {
-                document.getElementById("sortModal").style.display = "block";
-            }
-
-            function closeSortModal() {
-                document.getElementById("sortModal").style.display = "none";
-            }
-
-            // Close the modal if user clicks outside the modal content
-            window.onclick = function(event) {
-                var modal = document.getElementById("sortModal");
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-
 
   function printTable() {
     // Clone the table and remove the Action column
@@ -297,6 +274,41 @@
     window.print();
     document.body.innerHTML = originalContent;
   }
+
+  function openSortModal() {
+    document.getElementById('sortModal').style.display = 'block';
+}
+
+function closeSortModal() {
+    document.getElementById('sortModal').style.display = 'none';
+}
+
+function resetFilters() {
+    // Reset all fields in the modal
+    document.getElementById('serialNum').value = '';
+    document.getElementsByName('dateOrder').forEach(radio => radio.checked = false);
+    document.getElementById('startDate').value = '';
+    document.getElementById('endDate').value = '';
+}
+
+function applyFilters() {
+    // Extract filter values
+    const serialNum = document.getElementById('serialNum').value;
+    const dateOrder = document.querySelector('input[name="dateOrder"]:checked')?.value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    
+    // Example: log the values (you can apply these values to filter your data)
+    console.log('Serial Number:', serialNum);
+    console.log('Date Order:', dateOrder);
+    console.log('Start Date:', startDate);
+    console.log('End Date:', endDate);
+    
+    // Close the modal after applying filters
+    closeSortModal();
+}
+
+  
 </script>
 
 </body>
