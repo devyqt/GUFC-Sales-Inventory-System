@@ -1,16 +1,15 @@
 <?php
 include 'db_connection.php';
 
-// Handle GET requests to fetch products
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $sql = "SELECT pt.product_id, pt.Product_Name, pt.Product_Price, 
-                   pv.variant_id, pv.Product_Date, pv.expiration_date, pv.quantity, pv.status,
-                   GROUP_CONCAT(ps.serial_number SEPARATOR '\n') AS serial_numbers
+                   pv.variant_id, pv.Product_Date, pv.expiration_date, pv.status,
+                   ps.serial_number, 
+                   1 AS quantity  -- Each serial number represents a single quantity
             FROM product_table pt
             LEFT JOIN product_variants pv ON pt.product_id = pv.product_id
             LEFT JOIN product_serials ps ON pv.variant_id = ps.variant_id
-            GROUP BY pt.product_id, pt.Product_Name, pt.Product_Price,
-                     pv.variant_id, pv.Product_Date, pv.expiration_date, pv.quantity, pv.status";
+            ORDER BY pt.product_id, pv.variant_id, ps.serial_number";  // Optional: Order by for better sorting
 
     $result = $conn->query($sql);
 
