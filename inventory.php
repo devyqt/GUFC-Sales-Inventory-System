@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="CSS/style.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="CSS/modal.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="CSS/inventory.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="CSS/settings.css?v=<?php echo time(); ?>">
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   
@@ -14,7 +15,6 @@
 
 <?php include 'navbar.html'; ?>
 
-<!-- Admin Profile Component Start -->
 <div class="admin-profile">
     <div class="profile-info">
         <div class="profile-name">Solane Admin</div>
@@ -24,11 +24,16 @@
         <img src="images/admin logo.png" alt="Profile Avatar"> <!-- Replace with the path to your image -->
     </div>
     <div class="settings-icon">
-        <img src="images/settings.png" alt="Settings"> <!-- Replace with the path to your settings icon -->
+        <img src="images/settings.png" alt="Settings" onclick="toggleDropdown()"> <!-- Replace with the path to your settings icon -->
+        
+        <!-- Settings Dropdown -->
+        <div class="settings-dropdown" id="settingsDropdown">
+            <a href="profile.php">Admin Profile</a>
+            <a href="order_invoice.php">Order Invoice</a>
+            <a href="logout.php">Logout</a>
+        </div>
     </div>
-  </div>
-  <!-- Admin Profile Component End -->
-
+</div>
   <div class="container">
   <section class="main">
     <div class="inventory-tab-container">
