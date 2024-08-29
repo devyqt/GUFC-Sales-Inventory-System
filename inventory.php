@@ -177,42 +177,24 @@
    
    
     <table id="productTable">
-      <thead>
+    <thead>
         <tr>
-          <th>Select</th>
-          <th>Product Name</th>
-          <th>Quantity</th>
-          <th>Date Added</th>
-          <th>Expiration Date</th>
-          <th>Status</th>
-          <th>Action</th>
+            <th>Select</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Product Date</th>
+            <th>Expiration Date</th>
+            <th>Status</th>
+            <th>Serial Number</th>
+            <th>Actions</th>
         </tr>
-      </thead>
-      <tbody>
-        <!-- Data will be populated here by JavaScript -->
-      </tbody>
-    </table>
+    </thead>
+    <tbody>
+        <!-- Rows will be dynamically inserted here -->
+    </tbody>
+</table>
 
-    <!-- Modal for Serial Numbers -->
-    <div id="serialModal" class="modal" style="display: none;">
-      <div class="modal-content">
-        <span class="close" onclick="closeSerialModal()">&times;</span>
-        <h2>Serial Numbers</h2>
-        <table id="serialModalTable">
-          <thead>
-            <tr>
-              <th>Serial Number</th>
-              <th>Product Date</th>
-              <th>Expiration Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="serialTableBody">
-            <!-- Serial numbers will be populated here by JavaScript -->
-          </tbody>
-        </table>
-      </div>
-    </div>
+
 
 
 

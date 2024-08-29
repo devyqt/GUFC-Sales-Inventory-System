@@ -23,30 +23,18 @@ function fetchProducts() {
             const tableBody = document.querySelector('#productTable tbody');
             tableBody.innerHTML = ''; // Clear existing rows
 
-            // Group products by name
-            const groupedProducts = data.reduce((acc, product) => {
-                if (!acc[product.Product_Name]) {
-                    acc[product.Product_Name] = {
-                        ...product,
-                        total_quantity: 0
-                    };
-                }
-                acc[product.Product_Name].total_quantity += parseInt(product.quantity, 10);
-                return acc;
-            }, {});
-
-            // Create table rows for each grouped product
-            Object.values(groupedProducts).forEach(product => {
+            // Iterate over each product entry
+            data.forEach(product => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td><input type="checkbox" class="product-checkbox" value="${product.product_id}"></td>
                     <td>${product.Product_Name}</td>
-                    <td>${product.total_quantity}</td>
-                    <td>${product.Product_Date}</td>
-                    <td>${product.expiration_date}</td>
-                    <td>${product.status}</td>
+                    <td>1</td>  <!-- Quantity is 1 per serial number -->
+                    <td>${product.Product_Date || 'N/A'}</td>
+                    <td>${product.expiration_date || 'N/A'}</td>
+                    <td>${product.status || 'N/A'}</td>
+                    <td>${product.serial_number || 'N/A'}</td>
                     <td>
-                        <button onclick="viewSerials('${product.product_id}')">View Serial Numbers</button>
                         <button onclick="deleteProduct('${product.product_id}')">Delete</button>
                     </td>
                 `;
@@ -55,6 +43,9 @@ function fetchProducts() {
         })
         .catch(error => console.error('Error:', error)); // Handle errors
 }
+
+
+
 
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', fetchProducts);
