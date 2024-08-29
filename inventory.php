@@ -76,8 +76,7 @@
           </div>
                 <!-- Add Product Button for Cylinders -->
         <button class="add-product-button" onclick="openModal()">Add Cylinder</button>
-        
-        </div>
+      </div>
 
       <!-- Other Products Tab -->
       <div id="other-products" class="tab-pane">
@@ -189,11 +188,6 @@
     </tbody>
 </table>
 
-
-
-
-
-
 <!-- Modal HTML -->
 <div id="productModal" class="modal">
   <div class="modal-content">
@@ -204,42 +198,52 @@
     <h3>Add Product</h3>
     <form id="addProductForm">
       <div class="form-group">
-        <label for="productID">Product ID:</label> 
-        <input type="text" id="productID" name="productID" class="form-control" readonly> <!-- Read-only if auto-generated -->
+        <label for="productID">Product ID:</label>
+        <input type="text" id="productID" name="productID" class="form-control" readonly>
+      </div>
+      <div class="form-group">
+        <label for="productType">Product Type:</label>
+        <select id="productType" name="productType" class="form-control" required onchange="toggleProductOptions()">
+          <option value="" disabled selected>Select Type</option>
+          <option value="cylinder">Cylinder</option>
+          <option value="non-cylinder">Non-Cylinder</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="productName">Product Name:</label>
-        <input type="text" id="productName" name="productName" class="form-control" required>
+        <select id="productName" name="productName" class="form-control" required onchange="updateProductPrice()">
+          <!-- Options will be populated based on selection -->
+        </select>
+      </div>
+      <div class="form-group" id="hoseLengthGroup" style="display: none;">
+        <label for="hoseLength">Hose Length (in meters):</label>
+        <input type="number" id="hoseLength" name="hoseLength" class="form-control" min="0" step="0.1">
       </div>
       <div class="form-group">
-        <label for="productQuantity">Quantity:</label> 
+        <label for="productQuantity">Quantity:</label>
         <input type="number" id="productQuantity" name="productQuantity" class="form-control" required>
       </div>
       <div class="form-group">
-        <label for="productPrice">Product Price:</label> 
-        <input type="text" id="productPrice" name="productPrice" class="form-control" required>
+        <label for="productPrice">Product Price:</label>
+        <input type="text" id="productPrice" name="productPrice" class="form-control" readonly>
       </div>
       <div class="form-group">
         <label for="productDate">Date:</label>
-        <input type="date" id="productDate" name="productDate" class="form-control" required>
+        <input type="date" id="productDate" name="productDate" class="form-control" required onchange="updateExpirationDate()">
       </div>
       <div class="form-group">
         <label for="expirationDate">Expiration Date:</label>
         <input type="date" id="expirationDate" name="expirationDate" class="form-control">
       </div>
       <div class="form-group">
-        <label for="serialNumbers">Serial Numbers (one per line):</label>
-        <textarea id="serialNumbers" name="serialNumbers" class="form-control" placeholder="Enter serial numbers, one per line" rows="4"></textarea>
+        <label for="serialNumbers">Serial Numbers (one per line, include hose length if applicable):</label>
+        <textarea id="serialNumbers" name="serialNumbers" class="form-control" placeholder="Enter serial numbers with hose length, one per line, e.g., SN001 - 2.5" rows="4"></textarea>
         <div id="serialError" style="color: red; display: none;">The number of serial numbers exceeds the quantity.</div>
       </div>
       <button type="submit" class="btn-submit">Submit</button>
     </form>
   </div>
 </div>
-
-
-
-
 
 
 <script src="JS/inventory.js"></script>
