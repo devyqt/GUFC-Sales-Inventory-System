@@ -66,8 +66,8 @@ function populateProductTable(products) {
             <td>${product.status}</td>
             <td>${product.serial_number}</td>
             <td>
-                <button onclick="editProduct(${product.product_id})">Edit</button>
-                <button onclick="deleteProductBySerial('${product.serial_number}')">Delete by Serial</button>
+                <button onclick="editProduct(${product.product_id})">EDIT</button>
+                <button onclick="deleteProductBySerial('${product.serial_number}')">DELETE</button>
             </td>
         `;
 

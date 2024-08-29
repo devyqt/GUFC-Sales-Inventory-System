@@ -251,9 +251,29 @@
 </div>
 
 
-<script src="JS/inventory.js"></script>
 
+
+
+<script src="JS/inventory.js"></script>
+<script src="JS/settings.js"></script>
 <script>
+ function openSortModal() {
+                document.getElementById("sortModal").style.display = "block";
+            }
+
+            function closeSortModal() {
+                document.getElementById("sortModal").style.display = "none";
+            }
+
+            // Close the modal if user clicks outside the modal content
+            window.onclick = function(event) {
+                var modal = document.getElementById("sortModal");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+
   function printTable() {
     // Clone the table and remove the Action column
     var table = document.getElementById('productTable').cloneNode(true);
