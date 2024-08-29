@@ -51,8 +51,6 @@ $conn->close();
         
         <!-- Settings Dropdown -->
         <div class="settings-dropdown" id="settingsDropdown">
-            <a href="profile.php">Admin Profile</a>
-            <a href="order_invoice.php">Order Invoice</a>
             <a href="logout.php">Logout</a>
         </div>
     </div>

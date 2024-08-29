@@ -28,8 +28,6 @@
         
         <!-- Settings Dropdown -->
         <div class="settings-dropdown" id="settingsDropdown">
-            <a href="profile.php">Admin Profile</a>
-            <a href="order_invoice.php">Order Invoice</a>
             <a href="logout.php">Logout</a>
         </div>
     </div>
@@ -83,8 +81,26 @@
               <p><strong>Product Name:</strong> Hose with Clamps</p>
               <p><strong>Description:</strong> Durable and reliable.</p>
           </div>
-    </div>
-
+      <div class="tab-content">
+      <h2>OTHER PRODUCT</h2>
+        <!-- Cylinders Tab -->
+        <div id="cylinders" class="tab-pane active">
+          <div class="productList-container">
+            <div class="box">
+              <img src="images/butane gas.jpg" alt="Product 1" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
+              <p><strong>Product Name:</strong> Butane Gas</p>
+              <p><strong>Description:</strong> High quality cylinder.</p>
+            </div>
+            <div class="box">
+              <img src="images/GAS STOVE.jpg" alt="Product 2" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
+              <p><strong>Product Name:</strong> Gas Stove</p>
+              <p><strong>Description:</strong> Durable and reliable.</p>
+            </div>
+            <div class="box">
+              <img src="images/MOTOLITE.jpg" alt="Product 3" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
+              <p><strong>Product Name:</strong> Motolite</p>
+              <p><strong>Description:</strong> High quality cylinder.</p>
+          </div>
     <script src="js/settings.js"></script>
 </section>
 </body>
