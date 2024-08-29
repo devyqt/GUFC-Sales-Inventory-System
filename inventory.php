@@ -167,27 +167,6 @@
             </div>
         </div>
 
-        <!-- JavaScript to handle modal -->
-        <script>
-            function openSortModal() {
-                document.getElementById("sortModal").style.display = "block";
-            }
-
-            function closeSortModal() {
-                document.getElementById("sortModal").style.display = "none";
-            }
-
-            // Close the modal if user clicks outside the modal content
-            window.onclick = function(event) {
-                var modal = document.getElementById("sortModal");
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
-
-
-
     <button id="deleteSelected" class="btn-delete">Delete Selected</button>
     <button onclick="printTable()" class="btn-print no-print">Print Table</button>
    
@@ -209,17 +188,28 @@
       </tbody>
     </table>
 
-    <!-- Expanded rows for serial numbers -->
-    <table id="serialTable" style="display: none;">
-      <thead>
-        <tr>
-          <th>Serial Number</th>
-        </tr>
-      </thead>
-      <tbody id="serialTableBody">
-        <!-- Serial numbers will be populated here by JavaScript -->
-      </tbody>
-    </table>
+    <!-- Modal for Serial Numbers -->
+    <div id="serialModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeSerialModal()">&times;</span>
+        <h2>Serial Numbers</h2>
+        <table id="serialModalTable">
+          <thead>
+            <tr>
+              <th>Serial Number</th>
+              <th>Product Date</th>
+              <th>Expiration Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="serialTableBody">
+            <!-- Serial numbers will be populated here by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
 
 
 <!-- Modal HTML -->
@@ -233,7 +223,7 @@
     <form id="addProductForm">
       <div class="form-group">
         <label for="productID">Product ID:</label> 
-        <input type="text" id="productID" name="productID" class="form-control" required>
+        <input type="text" id="productID" name="productID" class="form-control" readonly> <!-- Read-only if auto-generated -->
       </div>
       <div class="form-group">
         <label for="productName">Product Name:</label>
@@ -264,6 +254,7 @@
     </form>
   </div>
 </div>
+
 
 
 

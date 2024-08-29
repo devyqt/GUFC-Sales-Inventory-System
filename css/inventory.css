@@ -488,3 +488,45 @@ html, body {
   height: auto;
   cursor: pointer;
 }
+
+/* Table styling */
+#serialModalTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#serialModalTable th, #serialModalTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#serialModalTable th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+#serialModalTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#serialModalTable tr:hover {
+  background-color: #ddd;
+}
+
+#serialModalTable td button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 0;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#serialModalTable td button:hover {
+  background-color: #0056b3;
+}
