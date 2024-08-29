@@ -1,0 +1,25 @@
+/* Settings Dropdown Styles */
+.settings-dropdown {
+    display: none; /* Hidden by default */
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    min-width: 150px;
+    z-index: 1;
+    text-align: left;
+  }
+  
+  .settings-dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .settings-dropdown a:hover {
+    background-color: #f1f1f1;
+  }
+  

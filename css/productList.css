@@ -1,129 +1,63 @@
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Sidebar styling */
-  .sidebar {
-    position: fixed; /* Fix the sidebar in place */
-    top: 0; /* Align it to the top of the viewport */
-    left: 0; /* Align it to the left of the viewport */
-    width: 280px; /* Set the width of the sidebar */
-    height: 100vh; /* Full height of the viewport */
-    background-color: #001670; /* Background color */
-    padding: 20px;
-    z-index: 1000; /* Ensure it stays on top of other elements */
-    overflow-y: auto; /* Allows scrolling if content is taller than viewport */
-  }
-  
-  /* Adjust the main content to account for the sidebar */
-  .dashboard, .main, .product-table-container {
-    margin-left: 280px; /* Matches the sidebar width */
-    padding: 20px;
-    background: #f1f5f8;
-    min-height: 100vh;
-    transition: margin-left 0.3s; /* Smooth transition if width changes */
-    box-sizing: border-box; /* Include padding and border in the element's total width */
-  }
-  
-  /* Tab Container Styles */
-  .tab-container {
-    width: 100%; /* Full width of the container */
-    box-sizing: border-box; /* Includes padding and border in the element's total width */
-    padding: 0 20px; /* Adjust padding to fit within main content area */
-    margin-left: 0; /* Remove left margin to align with main content */
-  }
-  
-  /* Tabs Container */
-  .tabs {
-    display: flex;
-    justify-content: center; /* Center align the tabs horizontally */
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    background: #f1f1f1;
-    width: 100%; /* Full width */
-  }
-  
-  /* Individual Tab Links */
-  .tabs li {
-    flex: 1; /* Allow tabs to stretch equally */
-    margin: 0;
-  }
-  
-  .tab-link {
-    display: block;
-    padding: 10px 20px;
-    color: #333;
-    text-decoration: none;
-    background: #ddd;
-    border-radius: 5px;
-    text-align: center; /* Center text inside each tab */
-    transition: background-color 0.3s, font-weight 0.3s;
-  }
-  
-  .tab-link.active {
-    background: #fff;
-    font-weight: bold;
-    border-bottom: 1px solid #fff;
-  }
-  
-  .tab-link:hover {
-    background: #bbb;
-  }
-  
-  /* Tab Content Styles */
-  .tab-content {
-    padding: 20px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 0 0 5px 5px;
-    width: 100%; /* Full width */
-  }
-  
-  /* Ensure active tab pane is visible */
-  .tab-pane {
-    display: none;
-  }
-  
-  .tab-pane.active {
-    display: block;
-  }
-  
-  /* Product Container Styles */
-  .product-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Space between the product boxes */
-    margin-top: 20px;
-    justify-content: flex-start; /* Align the product boxes to the left */
-    padding: 0 20px; /* Add padding to keep the content away from the edges */
-    margin-left: 0; /* Remove left margin to align with main content */
-    box-sizing: border-box; /* Ensure padding is included in width calculations */
-  }
-  
-  /* Individual Product Box */
-  .box {
-    background: #fff; /* Background color for the product box */
-    border: 1px solid #ddd; /* Subtle border around each product */
-    border-radius: 5px; /* Rounded corners */
-    padding: 15px; /* Inner padding for content */
-    text-align: center; /* Center align the content */
-    width: calc(25% - 20px); /* Adjust the width to fit 4 items in a row */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.2s; /* Smooth transform effect on hover */
-  }
-  
-  /* Hover effect on product box */
-  .box:hover {
-    transform: translateY(-5px); /* Slightly lift the box on hover */
-  }
-  
-  /* Product Image Styling */
-  .product-img {
-    width: 100%; /* Make sure the image fills the width of the box */
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 15px;
-  }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Adjust the main content to account for the sidebar */
+.dashboard, .mainList, .product-table-container {
+  margin-left: 280px; /* Matches the sidebar width */
+  width: 100%;
+  padding: 20px;
+  background: #f1f5f8;
+  min-height: 100vh;
+  transition: margin-left 0.3s; /* Smooth transition if width changes */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+} 
+
+/* Heading Styles */
+h2 {
+  margin-top: 82px;
+  margin-left: 25px;
+  margin-bottom: 10px;
+  color: #333; /* Dark text color for the heading */
+  font-size: 24px; /* Font size for the heading */
+  font-weight: bold;
+}
+
+/* Product Container Styles */
+.productList-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between the product boxes */
+  margin-top: 20px;
+  justify-content: flex-start; /* Align the product boxes to the left */
+  padding: 0 20px; /* Add padding to keep the content away from the edges */
+  margin-left: 0; /* Remove left margin to align with main content */
+  box-sizing: border-box; /* Ensure padding is included in width calculations */
+}
+
+/* Individual Product Box */
+.box {
+  background: #fff; /* Background color for the product box */
+  border: 1px solid #ddd; /* Subtle border around each product */
+  border-radius: 5px; /* Rounded corners */
+  padding: 15px; /* Inner padding for content */
+  text-align: center; /* Center align the content */
+  width: calc(25% - 20px); /* Adjust the width to fit 4 items in a row */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.2s; /* Smooth transform effect on hover */
+}
+
+/* Hover effect on product box */
+.box:hover {
+  transform: translateY(-5px); /* Slightly lift the box on hover */
+}
+
+/* Product Image Styling */
+.product-img {
+  width: 100%; /* Make sure the image fills the width of the box */
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
