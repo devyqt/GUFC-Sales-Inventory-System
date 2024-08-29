@@ -60,7 +60,7 @@ body {
     padding: 20px;
     border: 1px solid #888;
     width: 25%; /* Ensure the content fits within the modal container */
-    height: 70%;
+    height: 65%;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Add a subtle shadow for depth */
 }
 
@@ -89,7 +89,7 @@ body {
     margin-top: 5px;
     margin-bottom: 5px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 0px;
 
     
@@ -181,7 +181,7 @@ body {
 }
 
 .table tbody td {
-    padding: 15px 10px;
+    padding: -0px 5px 3px;
     color: #333;
     vertical-align: middle;
     text-align: left;
@@ -198,6 +198,7 @@ body {
 /* Adjust margin for table container */
 .table-container {
     margin-top: 20px;
+
 }
 
 /* Responsive */
