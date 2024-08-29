@@ -14,19 +14,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close the modals
     Array.from(closeModal).forEach(closeButton => {
         closeButton.onclick = function() {
-            modal.style.display = 'none';
-            changePasswordModal.style.display = 'none';
+            closeModals();
         }
     });
 
     // Click outside of the modal to close it
     window.onclick = function(event) {
         if (event.target == modal || event.target == changePasswordModal) {
-            modal.style.display = 'none';
-            changePasswordModal.style.display = 'none';
+            closeModals();
         }
     }
 });
+
+// Function to close modals and reset input
+function closeModals() {
+    document.getElementById('forgotPasswordModal').style.display = 'none';
+    document.getElementById('changePasswordModal').style.display = 'none';
+    
+    // Clear the authentication code input field
+    document.getElementById("authCode").value = '';
+    
+    // Hide error message
+    document.getElementById("error-message").style.display = "none";
+}
 
 // Function to validate the authentication code
 function validateCode() {
@@ -39,6 +49,9 @@ function validateCode() {
     } else {
         document.getElementById("error-message").style.display = "block";
     }
+
+    // Clear the authentication code input field after validation
+    document.getElementById("authCode").value = '';
 }
 
 // Function to change the password
