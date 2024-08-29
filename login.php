@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="login-container">
-        <img src="images/Background.png" alt="Background" class="background-img">
+        <img src="images/background.jpg" alt="Background" class="background-img">
         <div class="login-box">
             <img src="images/Solane Logo.png" alt="Solane Logo" class="logo">
             <form id="loginForm" method="post" action="login.php">

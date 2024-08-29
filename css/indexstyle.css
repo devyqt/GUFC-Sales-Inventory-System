@@ -10,46 +10,6 @@
   font-family: "Poppins", sans-serif;
   position: fix;
 
-/* Admin Profile Styles */
-.admin-profile {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 10px 20px;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-}
-
-.profile-info {
-  margin-right: 10px;
-  text-align: right;
-}
-
-.profile-name {
-  font-weight: bold;
-}
-
-.profile-role {
-  color: #666;
-  font-size: 12px;
-}
-
-.profile-image img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-  margin-top: 7px;
-}
-
-.settings-icon img {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  margin-top: 7px;
-}
-
 
 }
 /* Dashboard styles */
