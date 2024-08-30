@@ -3,7 +3,7 @@
 include 'db_connection.php';
 
 // Define a fixed set of colors
-$fixedColors = ['#78b7ff', '#703efa', '#d83efa', '#fa3e89'];
+$fixedColors = ['#0000FF', '#008000', '#00FFFF', '#800080']; // Blue, Green, Cyan, Purple
 
 // SQL query to fetch completed orders with product prices
 $sql = "SELECT 
@@ -101,6 +101,7 @@ $conn->close();
   <link rel="stylesheet" href="CSS/style.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="CSS/indexstyle.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="CSS/modal.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="CSS/settings.css?v=<?php echo time(); ?>">
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -110,7 +111,6 @@ $conn->close();
 <div class="container">
   <?php include 'navbar.html'; ?>
 
-  <!-- Admin Profile Component Start -->
   <div class="admin-profile">
     <div class="profile-info">
         <div class="profile-name">Solane Admin</div>
@@ -120,10 +120,14 @@ $conn->close();
         <img src="images/admin logo.png" alt="Profile Avatar"> <!-- Replace with the path to your image -->
     </div>
     <div class="settings-icon">
-        <img src="images/settings.png" alt="Settings"> <!-- Replace with the path to your settings icon -->
+        <img src="images/settings.png" alt="Settings" onclick="toggleDropdown()"> <!-- Replace with the path to your settings icon -->
+        
+        <!-- Settings Dropdown -->
+        <div class="settings-dropdown" id="settingsDropdown">
+            <a href="logout.php">Logout</a>
+        </div>
     </div>
-  </div>
-  <!-- Admin Profile Component End -->
+</div>
 
   <section class="dashboard">
     <h2>DASHBOARD</h2>
@@ -135,58 +139,27 @@ $conn->close();
     </div>
     
     <div class="right-box">
-
-    <!-- Conditionally display the Out of Stock Warning -->
-    <?php if (!empty($missingProducts)): ?>
-        <div class="out-of-stock-warning">
-            <h4>Out of Stock Warning!</h4>
-            <p>The following items are out of stock: <?php echo implode(', ', $missingProducts); ?>.</p>
+        <!-- Google Map Container -->
+        <div class="store-map">
+            <h4>Store Location</h4>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15441.577753574738!2d121.1214809!3d14.6335372!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b9f23793fe4f%3A0x75ecbe87baad67d9!2sSolane%20Gufc!5e0!3m2!1sen!2sph!4v1724744063862!5m2!1sen!2sph" width="100%" height="300" style="border:0; border-radius:10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-    <?php endif; ?>
+
+        <!-- Conditionally display the Out of Stock Warning -->
+        <?php if (!empty($missingProducts)): ?>
+            <div class="out-of-stock-warning">
+                <h4>Out of Stock Warning!</h4>
+                <p>The following items are out of stock: <?php echo implode(', ', $missingProducts); ?>.</p>
+            </div>
+        <?php endif; ?>
     </div>
 
-    <div class="sales-overview">
-        <h3>Sales Overview</h3>
-        <!-- The canvas element for the chart -->
-        <canvas id="salesChart"></canvas>
-    </div>
-  </section>
-
-  
-
+<div class="sales-overview">
+<h3>Sales Overview</h3>
+<!-- The canvas element for the chart -->
+<canvas id="salesChart"></canvas>
 </div>
-
-<!-- Script for the chart -->
-<script>
-    var ctx = document.getElementById('salesChart').getContext('2d');
-    var salesData = <?php echo json_encode($salesData); ?>;
-    
-    var salesChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: salesData.labels,
-            datasets: [{
-                label: 'Sales per Product',
-                backgroundColor: salesData.colors,
-                borderColor: salesData.colors,
-                borderWidth: 1,
-                data: salesData.data
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                }
-            }
-        }
-    });
-</script>
+<script src="js/settings.js"></script>
+</section>
 </body>
 </html>
