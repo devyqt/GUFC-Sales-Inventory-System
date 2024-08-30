@@ -23,55 +23,48 @@
         <li><a href="#other-products" class="tab-link">Other Products</a></li>
       </ul>
 
-      <!-- Tab Content -->
-      <div class="tab-content">
-        <!-- Cylinders Tab -->
+<!-- Tab Content -->
+<div class="tab-content">
+        <!-- Products Tab -->
         <div id="cylinders" class="tab-pane active">
-          <div class="product-container">
-            <div class="box">
-              <img src="images/11kg.jpg" alt="Product 1" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
-              <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
-              <p><strong>Description:</strong> High quality cylinder.</p>
-            </div>
-            <div class="box">
-              <img src="images/14kg.jpg" alt="Product 2" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
-              <p><strong>Product Name:</strong> 1.4kg Solane Sakto</p>
-              <p><strong>Description:</strong> Durable and reliable.</p>
-            </div>
-            <div class="box">
-              <img src="images/22kg.jpg" alt="Product 3" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
-              <p><strong>Product Name:</strong> 22kg POL Cylinder</p>
-              <p><strong>Description:</strong> High quality cylinder.</p>
-            </div>
-            <div class="box">
-              <img src="images/50kg.jpg" alt="Product 4" class="product-img" style="width: 230px; height: 230px; object-fit: cover;">
-              <p><strong>Product Name:</strong> 50kg Cylinder</p>
-              <p><strong>Description:</strong> Durable and reliable.</p>
-            </div>
+          <div class="inventory-container">
+          <div class="Invbox">
+        <p><strong>Product Name:</strong> 11kg Auto-Shutoff Cylinder</p>
+        <p><strong>Quantity:</strong> <span id="first-total">0</span></p>
+      </div>
+      <div class="Invbox">
+        <p><strong>Product Name:</strong> 11kg POL Cylinder</p>
+        <p><strong>Quantity:</strong> <span id="second-total">0</span></p>
+      </div>
+      <div class="Invbox">
+        <p><strong>Product Name:</strong> 1.4kg Solane Sakto</p>
+        <p><strong>Quantity:</strong> <span id="third-total">0</span></p>
+      </div>
+      <div class="Invbox">
+        <p><strong>Product Name:</strong> 22kg POL Cylinder</p>
+        <p><strong>Quantity:</strong> <span id="fourth-total">0</span></p>
+      </div>
+      <div class="Invbox">
+        <p><strong>Product Name:</strong> 50kg Cylinder</p>
+        <p><strong>Quantity:</strong> <span id="fifth-total">0</span></p>
+      </div>
+      <div class="Invbox">
+        <p><strong>Product Name:</strong> POL Regulator</p>
+        <p><strong>Quantity:</strong> <span id="sixth-total">0</span></p>
+      </div>
+      <div class="Invbox">
+        <p><strong>Product Name:</strong> AS Regulator</p>
+        <p><strong>Quantity:</strong> <span id="seventh-total">0</span></p>
+      </div>
+      <div class="Invbox">
+        <p><strong>Product Name:</strong> Hose with Clamps</p>
+        <p><strong>Quantity:</strong> <span id="eight-total">0</span></p>
+      </div>
+
           </div>
           <!-- Add Product Button for Cylinders -->
           <button class="add-product-button" onclick="openModal()">Add Cylinder</button>
         </div>
-
-        <!-- Other Products Tab -->
-        <div id="other-products" class="tab-pane">
-          <div class="product-container">
-            <div class="box">
-              <img src="images/product3.jpg" alt="Product 3" class="product-img">
-              <p><strong>Product Name:</strong> Accessory A</p>
-              <p><strong>Description:</strong> Essential accessory.</p>
-            </div>
-            <div class="box">
-              <img src="images/product4.jpg" alt="Product 4" class="product-img">
-              <p><strong>Product Name:</strong> Accessory B</p>
-              <p><strong>Description:</strong> High-quality material.</p>
-            </div>
-          </div>
-          <!-- Add Product Button for Other Products -->
-          <button class="add-product-button" onclick="openModal()">Add Accessory</button>
-        </div>
-      </div>
-    </div>
 
 
     
@@ -80,22 +73,22 @@
     <!-- Product Table -->
     <div class="product-table" id="printableArea">
         
-        <table id="productTable" class="print-table">
-            <thead>
-                <tr>
-                    <th>Select</th>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Product rows will be populated here by JavaScript -->
-            </tbody>
-        </table>
+    <table id="productTable" class="print-table">
+    <thead>
+        <tr>
+                <th>Select</th>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Date</th>
+                <th>Expiration Date</th>
+                <th>Status</th>
+                <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Product rows will be populated here by JavaScript -->
+    </tbody>
+</table>
     </div>
   </section>
 </div>
@@ -107,31 +100,53 @@
     <h3>Add Product</h3>
     <form id="addProductForm">
       <div class="form-group">
-        <label for="productID">Product ID:</label> 
-        <input type="text" id="productID" name="productID" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="productName">Product Name:</label>
-        <select id="productName" name="productName" class="form-control" required>
-          <option value="">Select Cylinder</option>
-          <option value="11kg Auto-Shutoff Cylinder">11kg Auto-Shutoff Cylinder</option>
-          <option value="1.4kg Solane Sakto">1.4kg Solane Sakto</option>
-          <option value="22kg POL Cylinder">22kg POL Cylinder</option>
-          <option value="50kg Cylinder">50kg Cylinder</option>
+        <label for="productType">Product Type:</label>
+        <select id="productType" name="productType" class="form-control" required onchange="toggleProductOptions()">
+          <option value="" disabled selected>Select Type</option>
+          <option value="cylinder">Cylinder</option>
+          <option value="non-cylinder">Non-Cylinder</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="productPrice">Product Price</label> 
-        <input type="text" id="productPrice" name="productPrice" class="form-control" required>
+        <label for="productName">Product Name:</label>
+        <select id="productName" name="productName" class="form-control" required onchange="updateProductPrice()">
+          <option value="" disabled selected>Select Product</option>
+          <!-- Options will be populated based on selection -->
+        </select>
+      </div>
+      <div class="form-group" id="hoseLengthGroup" style="display: none;">
+        <label for="hoseLength">Hose Length (in meters):</label>
+        <input type="number" id="hoseLength" name="hoseLength" class="form-control" min="0" step="0.1">
+      </div>
+      <div class="form-group">
+        <label for="productQuantity">Quantity:</label>
+        <input type="number" id="productQuantity" name="productQuantity" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="productIDs">Product IDs:</label>
+        <!-- Modified to allow multiple product IDs separated by commas -->
+        <input type="text" id="productIDs" name="productIDs" class="form-control" placeholder="Enter multiple Product IDs separated by commas" required>
+      </div>
+      <div class="form-group">
+        <label for="productPrice">Product Price:</label>
+        <input type="text" id="productPrice" name="productPrice" class="form-control" readonly>
       </div>
       <div class="form-group">
         <label for="productDate">Date:</label>
-        <input type="date" id="productDate" name="productDate" class="form-control" required>
+        <input type="date" id="productDate" name="productDate" class="form-control" required onchange="updateExpirationDate()">
+      </div>
+      <div class="form-group">
+        <label for="expirationDate">Expiration Date:</label>
+        <input type="date" id="expirationDate" name="expirationDate" class="form-control">
       </div>
       <button type="submit" class="btn-submit">Submit</button>
     </form>
+    <div id="cameraOverlay" style="display: none;">
+      <video id="video" width="300" height="200" autoplay></video>
+    </div>
   </div>
 </div>
+
 
 <script src="JS/inventory.js"></script>
 

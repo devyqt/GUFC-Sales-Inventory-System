@@ -89,7 +89,7 @@ if (empty($order_details)) {
 <body>
     <div class="invoice-container">
         <div class="invoice-header">
-            <h1>Invoice</h1>
+            <h1>GUFC Solane</h1>
             <p>Order ID: <?php echo htmlspecialchars($order_id); ?></p>
             <p>Date: <?php echo htmlspecialchars(date('F j, Y', strtotime($order_details[0]['order_date']))); ?></p>
         </div>

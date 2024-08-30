@@ -3,7 +3,7 @@
 include 'db_connection.php';
 
 // Define a fixed set of colors
-$fixedColors = ['#0000FF', '#008000', '#00FFFF', '#800080']; // Blue, Green, Cyan, Purple
+$fixedColors = ['#78b7ff', '#703efa', '#d83efa', '#fa3e89'];
 
 // SQL query to fetch completed orders with product prices
 $sql = "SELECT 
@@ -151,6 +151,8 @@ $conn->close();
         <canvas id="salesChart"></canvas>
     </div>
   </section>
+
+  
 
 </div>
 

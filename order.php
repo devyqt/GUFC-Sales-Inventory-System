@@ -1,22 +1,31 @@
 <?php
 include 'db_connection.php';
 
-// Fetch and aggregate product data excluding already ordered products and only showing available products
-$product_sql = "
+// Initialize an array to hold products
+$products = [];
+$products_sql = "
     SELECT 
-        p.Product_Name, 
-        p.Product_Price, 
-        COUNT(p.product_id) AS Total_Quantity 
-    FROM product_table p
-    WHERE p.status = 'available' AND p.product_id NOT IN (
-        SELECT DISTINCT product_id 
-        FROM order_details
-    )
-    GROUP BY p.product_id, p.Product_Name, p.Product_Price";
-$product_result = $conn->query($product_sql);
-if (!$product_result) {
+        product_id, 
+        Product_Name, 
+        Product_Price, 
+        quantity
+    FROM product_table
+    WHERE status = 'available' AND product_id NOT IN (
+        SELECT DISTINCT product_id FROM order_details
+    )";
+$products_result = $conn->query($products_sql);
+if ($products_result) {
+    while ($row = $products_result->fetch_assoc()) {
+        $products[$row['product_id']] = [
+            'name' => $row['Product_Name'],
+            'price' => $row['Product_Price'],
+            'quantity' => $row['quantity']
+        ];
+    }
+} else {
     die("Error: " . $conn->error);
 }
+
 
 // Fetch data from order_details along with customer and product information
 $order_sql = "
@@ -182,76 +191,130 @@ if (!$customer_result) {
         <h2 class="modal-title" id="modalTitle">ADD PRODUCT</h2>
         
         <form method="POST" action="add_order.php">
-            <div class="product-list">
-                <?php
-                $products = [];
-                if ($product_result->num_rows > 0) {
-                    while ($product_row = $product_result->fetch_assoc()) {
-                        $product_name = $product_row['Product_Name'];
-                        $product_price = $product_row['Product_Price'];
-                        $total_quantity = $product_row['Total_Quantity'];
-                        $safe_product_name = preg_replace('/[^a-zA-Z0-9]/', '_', $product_name);
-
-                        if (!isset($products[$product_name])) {
-                            $products[$product_name] = [
-                                'price' => $product_price,
-                                'quantity' => $total_quantity
-                            ];
-                        } else {
-                            $products[$product_name]['quantity'] += $total_quantity;
-                        }
-                    }
-
-                    foreach ($products as $name => $details) {
-                        $product_price = $details['price'];
-                        $total_quantity = $details['quantity'];
-                        $safe_product_name = preg_replace('/[^a-zA-Z0-9]/', '_', $name);
-
-                        echo '<div class="product-item">';
-                        echo '<input type="checkbox" name="products[]" value="' . htmlspecialchars($name) . '" aria-label="Select Product ' . htmlspecialchars($name) . '">';
-                        echo '<img src="images/' . htmlspecialchars($name) . '.jpg" alt="' . htmlspecialchars($name) . '" class="product-img">';
-                        echo '<div class="product-info">';
-                        echo '<h4>' . htmlspecialchars($name) . '</h4>';
-                        echo '</div>';
-                        echo '<div class="product-price">';
-                        echo '<p>₱' . number_format($product_price, 2) . '</p>';
-                        echo '</div>';
-                        echo '<div class="product-quantity">';
-                        echo '<label for="quantity' . $safe_product_name . '">Quantity</label>';
-                        echo '<input type="number" id="quantity' . $safe_product_name . '" name="quantity[' . htmlspecialchars($name) . ']" value="1" min="1" max="' . $total_quantity . '">';
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo '<p>No products available.</p>';
-                }
-                ?>
+    <!-- Loop through products and quantities -->
+    <?php foreach ($products as $product_id => $details): ?>
+        <div class="product-item">
+            <input type="checkbox" name="products[]" value="<?php echo htmlspecialchars($product_id); ?>">
+            <img src="images/<?php echo htmlspecialchars($product_id); ?>.jpg" alt="<?php echo htmlspecialchars($details['name']); ?>" class="product-img">
+            <div class="product-info">
+                <h4><?php echo htmlspecialchars($details['name']); ?></h4>
             </div>
-
-            <div class="customer-type">
-                <h4>Select Customer</h4>
-                <div class="customer-select">
-                    <select id="customerSelect" name="customer_id" aria-label="Select Customer">
-                        <?php
-                        if ($customer_result->num_rows > 0) {
-                            while ($customer_row = $customer_result->fetch_assoc()) {
-                                echo '<option value="' . $customer_row['Customer_ID'] . '">' . $customer_row['Customer_Name'] . '</option>';
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
+            <div class="product-price">
+                <p>₱<?php echo number_format($details['price'], 2); ?></p>
             </div>
-
-            <div class="order-date">
-                <label for="orderDate">Order Date</label>
-                <input type="date" id="orderDate" name="orderDate" required>
+            <div class="product-quantity">
+                <label for="quantity<?php echo htmlspecialchars($product_id); ?>">Quantity</label>
+                <input type="number" id="quantity<?php echo htmlspecialchars($product_id); ?>" name="quantity[<?php echo htmlspecialchars($product_id); ?>]" value="1" min="1" max="<?php echo $details['quantity']; ?>">
             </div>
+        </div>
+    <?php endforeach; ?>
 
-            <button type="submit" class="btn-submit">SUBMIT</button>
-        </form>
+    <!-- Customer and date fields -->
+    <div class="customer-type">
+        <h4>Select Customer</h4>
+        <div class="customer-select">
+            <select id="customerSelect" name="customer_id" aria-label="Select Customer">
+                <?php while ($customer_row = $customer_result->fetch_assoc()): ?>
+                    <option value="<?php echo $customer_row['Customer_ID']; ?>"><?php echo htmlspecialchars($customer_row['Customer_Name']); ?></option>
+                <?php endwhile; ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="order-date">
+        <label for="orderDate">Order Date</label>
+        <input type="date" id="orderDate" name="orderDate" required>
+    </div>
+
+    <button type="submit" class="btn-submit">SUBMIT</button>
+</form>
+
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Attach click event listeners to expand icons
+        document.querySelectorAll('.expand-icon').forEach(function (icon) {
+            icon.addEventListener('click', function () {
+                var orderId = this.getAttribute('data-order-id');
+                var detailsRow = document.getElementById('order-details-' + orderId);
+                if (detailsRow) {
+                    if (detailsRow.style.display === 'none' || detailsRow.style.display === '') {
+                        detailsRow.style.display = 'table-row';
+                        this.textContent = '-';
+                    } else {
+                        detailsRow.style.display = 'none';
+                        this.textContent = '+';
+                    }
+                }
+            });
+        });
+
+        // Add event listeners for status select elements
+        var statusSelects = document.querySelectorAll('.status-select');
+        statusSelects.forEach(function (select) {
+            select.addEventListener('change', function () {
+                var orderId = this.getAttribute('data-order-id');
+                var newStatus = this.value;
+                updateOrderStatus(orderId, newStatus);
+            });
+        });
+    });
+
+    function updateOrderStatus(orderId, newStatus) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_status.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                console.log("Status updated successfully.");
+            }
+        };
+        xhr.send("order_id=" + encodeURIComponent(orderId) + "&status=" + encodeURIComponent(newStatus));
+    }
+
+    function openProductModal() {
+        document.getElementById('orderModal').style.display = 'block';
+    }
+
+    function closeProductModal() {
+        document.getElementById('orderModal').style.display = 'none';
+    }
+
+    function deleteOrder(orderId) {
+        if (confirm("Are you sure you want to delete this order?")) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "delete_order.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    alert("Order deleted successfully.");
+                    location.reload(); // Reload page to reflect changes
+                }
+            };
+            xhr.send("order_id=" + encodeURIComponent(orderId));
+        }
+    }
+
+    document.getElementById('deleteSelectedOrders').addEventListener('click', function() {
+        var selectedCheckboxes = document.querySelectorAll('.order-checkbox:checked');
+        var orderIds = Array.from(selectedCheckboxes).map(cb => cb.getAttribute('data-order-id'));
+
+        if (orderIds.length > 0 && confirm("Are you sure you want to delete the selected orders?")) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "delete_selected_orders.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    alert("Selected orders deleted successfully.");
+                    location.reload(); // Reload page to reflect changes
+                }
+            };
+            xhr.send("order_ids=" + encodeURIComponent(orderIds.join(',')));
+        }
+    });
+</script>
 
 <script src="JS/order.js"></script>
 </body>
