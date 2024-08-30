@@ -59,8 +59,8 @@ $conn->close();
 
 
 <div class="main-content">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="fw-bold mb-0">Customers Information</h3>
+    <div class="d-flex">
+        <h3 class="fw-bold mb-0">Customer Information</h3>
         <button id="openModal" type="button" class="btn btn-primary btn-set-task">
             <i class="icofont-plus-circle me-2 fs-6"></i>Add Customer
         </button>
