@@ -17,71 +17,22 @@ html, body {
   overflow-y: auto; /* Allows scrolling if content is taller than viewport */
 }
 
-
-/* Admin Profile Styles */
-.admin-profile {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 10px 20px;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-}
-
-.profile-info {
-  margin-right: 10px;
-  text-align: right;
-}
-
-.profile-name {
-  font-weight: bold;
-}
-
-.profile-role {
-  color: #666;
-  font-size: 12px;
-}
-
-.profile-image img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-  margin-top: 7px;
-}
-
-.settings-icon img {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  margin-top: 7px;
-}
-
 /* Adjust the main content to account for the sidebar */
 .dashboard, .main, .product-table-container {
-  margin-top: 82px;
-  margin-left: 305px; /* Matches the sidebar width */
-  padding: 10px;
-  width: calc(97% - 280px);
-  background: #0d3858;
-  min-height: 0vh;
+  margin-left: 280px; /* Matches the sidebar width */
+  padding: 20px;
+  background: #f1f5f8;
+  min-height: 100vh;
   transition: margin-left 0.3s; /* Smooth transition if width changes */
   box-sizing: border-box; /* Include padding and border in the element's total width */
-  position: relative;
-  border-radius: 5px;
-
 }
 
 /* Tab Container Styles */
-.inventory-tab-container {
-  
+.tab-container {
   width: 100%; /* Full width of the container */
   box-sizing: border-box; /* Includes padding and border in the element's total width */
   padding: 0 20px; /* Adjust padding to fit within main content area */
   margin-left: 0; /* Remove left margin to align with main content */
-  ;
-  
 }
 
 /* Tabs Container */
@@ -119,11 +70,10 @@ html, body {
   border-bottom: 1px solid #fff;
 }
 
+
 .tab-link:hover {
   background: #bbb;
 }
-
-/*Product Inventory Box*/
 
 /* Box Styles */
 .Invbox {
@@ -136,16 +86,16 @@ html, body {
   text-align: center;
 }
 
+.Invbox p {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 .Invbox img {
   width: 150px;
   height: 150px;
   object-fit: cover;
   border-radius: 10px;
-}
-
-.Invbox p {
-  font-size: 12px;
-  margin-top: 5px;
 }
 
 /* Tab Styles */
@@ -174,7 +124,6 @@ html, body {
   background-color: #c8cac8;
 }
 
-
 .inventory-container {
   display: flex;
   flex-wrap: wrap;
@@ -187,240 +136,53 @@ html, body {
   
 }
 
-.other-container {
+/* Product Container Styles */
+.product-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px; /* Space between the product boxes */
   margin-top: 20px;
-  justify-content: center;
-  padding: 0 20px;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-
-}
-.other-container div {
-  width: 23%;
-  padding: 10px;
-  border-radius: 10px;
-  background: rgb(235, 233, 233);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  text-align: center;
-}
-.Other-item {
-  width: 23%;
-  padding: 10px;
-  border-radius: 10px;
-  background: rgb(235, 233, 233);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  text-align: center;
+  justify-content: flex-start; /* Align the product boxes to the left */
+  padding: 0 20px; /* Add padding to keep the content away from the edges */
+  margin-left: 0; /* Remove left margin to align with main content */
+  box-sizing: border-box; /* Ensure padding is included in width calculations */
 }
 
-.Other-item p {
-  font-size: 12px;
-  margin-top: 5px;
+/* Individual Product Box */
+.box {
+  background: #fff; /* Background color for the product box */
+  border: 1px solid #ddd; /* Subtle border around each product */
+  border-radius: 5px; /* Rounded corners */
+  padding: 15px; /* Inner padding for content */
+  text-align: center; /* Center align the content */
+  width: calc(25% - 20px); /* Adjust the width to fit 4 items in a row */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.2s; /* Smooth transform effect on hover */
 }
 
+/* Hover effect on product box */
+.box:hover {
+  transform: translateY(-5px); /* Slightly lift the box on hover */
+}
 
-
-
-/* Style the Sort Button */
-.sort-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 10px;
-  font-size: 14px;
-  background-color: #f8f9fa;
-  color: #333;
-  border: 1px solid #ddd;
+/* Product Image Styling */
+.product-img {
+  width: 100%; /* Make sure the image fills the width of the box */
+  height: auto;
   border-radius: 5px;
-  cursor: pointer;
-  margin-left: auto;  /* Aligns the button to the right */
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  margin-top: 10px;
-  margin-right: 24px;
-  margin-bottom: -25px;
-}
-
-.sort-button:hover {
-  background-color: #e9ecef;
-}
-
-.sort-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
-
-/* General Modal Styling */
-.sort-modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding-top: 60px;
-}
-
-.sort-modal-content {
-  background-color: #eeeeee;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-
-/* Close Button Styling */
-.close-button {
-  color: #000;
-  float: right;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-  background: none;
-  border: none;
-  margin-top: -10px;
-  transition: color 0.3s;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: #333;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* Modal Title Styling */
-.sort-modal-title {
-  text-align: left;
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-
-/* Sort Section Styling */
-.sort-section {
   margin-bottom: 15px;
 }
-
-.sort-section label {
-  display: block;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #333;
-}
-
-.sort-options label {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-.sort-options input[type="radio"] {
-  margin-right: 8px;
-}
-
-/* Date Range Styling */
-.date-range {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.date-range input[type="date"] {
-  width: 45%;
-  padding: 5px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.date-range span {
-  margin: 0 8px;
-}
-
-/* Action Buttons Styling */
-.sort-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.btn-reset,
-.btn-apply {
-  padding: 5px 12px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-reset {
-  background-color: #f0f0f0;
-  color: #333;
-  border: 1px solid #c9bfbf;
-  cursor: pointer;
-}
-
-.btn-apply {
-  background-color: #007bff;
-  color: #fff;
-  border: 1px solid #007bff;
-}
-
-.btn-apply:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-
-.btn-reset:hover {
-  background-color: #e0e0e0;
-}
-
-
 
 /* Add Product Button */
 .add-product-button {
-    padding: 6px 15px;
-    background-color: #08a50277;
-    color: rgb(255, 255, 255);
-    border-radius: 5px;
-    cursor: pointer;
-    display: block; /* or inline-block */
-    text-align: center; /* Ensure text is centered within the button */
-
-    
-    
-}
-
-.add-accessory-button {
-  padding: 6px 15px;
-  background-color: #08a50277;
-  color: rgb(255, 255, 255);
+  padding: 10px 20px;
+  background-color: #148a2d;
+  color: white;
   border-radius: 5px;
   cursor: pointer;
-  display: block; /* or inline-block */
-  text-align: center; /* Ensure text is centered within the button */
-  
+  display: block;
+  margin: 20px auto; /* Center the button horizontally */
 }
-
-.add-accessory-button:hover {
-  background-color: rgb(84, 84, 228);
-}
-
 
 .add-product-button:hover {
   background-color: #3a29d4;
@@ -434,20 +196,19 @@ html, body {
 }
 
 #productTable {
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  margin-left: 300px;
 }
 
 #productTable th, #productTable td {
-  border: 1px solid #ffffff;
+  border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
 
 #productTable th {
-  background-color:   #9797d1;
+  background-color: #f4f4f4;
 }
 
 /* Responsive Design - Adjustments for smaller screens */
@@ -472,61 +233,4 @@ html, body {
   .box {
     width: calc(100% - 20px); /* Adjust width to fit 1 item per row on very small screens */
   }
-}
-
-
-.camera-icon {
-  position: absolute;
-  top: 35%;
-  right: 13%;
-  translate: 
-  transform (-35%, -13%);
-}
-
-.camera-icon img {
-  width: 130px; /* Adjust the size as needed */
-  height: auto;
-  cursor: pointer;
-}
-
-/* Table styling */
-#serialModalTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-#serialModalTable th, #serialModalTable td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#serialModalTable th {
-  background-color: #f2f2f2;
-  text-align: left;
-}
-
-#serialModalTable tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-#serialModalTable tr:hover {
-  background-color: #ddd;
-}
-
-#serialModalTable td button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 2px 0;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-#serialModalTable td button:hover {
-  background-color: #0056b3;
 }
